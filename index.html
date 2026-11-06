@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
+    --fs: 1.5;   /* TEKSTGROOTTE: 1 = klein, 1.5 = standaard, 1.7 = groot */
     --glass: rgba(30,30,34,.52);
     --glass-strong: rgba(24,24,28,.70);
     --stroke: rgba(255,255,255,.12);
@@ -36,7 +37,7 @@
   @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-3%,2%) scale(1.06)}}
 
   /* ---------- menubalk ---------- */
-  #menubar{height:3.6vh;display:flex;align-items:center;gap:2.2vh;padding:0 1.8vh;font-size:1.65vh;font-weight:500;
+  #menubar{height:3.6vh;display:flex;align-items:center;gap:2.2vh;padding:0 1.8vh;font-size:calc(1.65vh*var(--fs));font-weight:500;
     background:rgba(20,20,30,.38);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
     border-bottom:1px solid rgba(255,255,255,.06)}
   #menubar .brand{font-weight:700;display:flex;align-items:center;gap:.8vh}
@@ -46,7 +47,7 @@
   .st{display:flex;align-items:center;gap:.5vh;color:rgba(255,255,255,.75);font-weight:400}
   .st i{width:.8vh;height:.8vh;border-radius:50%;background:#888}
   .st i.ok{background:var(--green)} .st i.err{background:var(--red)} .st i.wait{background:var(--orange)}
-  #dimBtn{cursor:pointer;font-size:1.9vh;padding:0 .4vh}
+  #dimBtn{cursor:pointer;font-size:calc(1.9vh*var(--fs));padding:0 .4vh}
   #mbClock{font-variant-numeric:tabular-nums}
 
   /* ---------- grid ---------- */
@@ -61,7 +62,7 @@
      backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);
      box-shadow:0 1.2vh 4vh rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
      padding:1.9vh 2.1vh;position:relative;overflow:hidden;min-height:0}
-  .wt{font-size:1.45vh;font-weight:600;letter-spacing:.02em;color:var(--sub);text-transform:uppercase;margin-bottom:1vh;display:flex;justify-content:space-between;align-items:center;gap:1vh}
+  .wt{font-size:calc(1.45vh*var(--fs));font-weight:600;letter-spacing:.02em;color:var(--sub);text-transform:uppercase;margin-bottom:1vh;display:flex;justify-content:space-between;align-items:center;gap:1vh}
   .wt b{color:var(--text);font-weight:600;text-transform:none;letter-spacing:0}
 
   /* ---------- klok + kalender ---------- */
@@ -69,10 +70,10 @@
   .row2 .w{flex:1;padding:1.4vh;display:flex;align-items:center;justify-content:center}
   #analog{height:100%;aspect-ratio:1}
   .cal{flex-direction:column;align-items:flex-start!important;justify-content:flex-start!important;padding:1.6vh 1.9vh!important}
-  #calDay{color:var(--red);font-weight:700;font-size:1.6vh;text-transform:uppercase;letter-spacing:.04em}
-  #calNum{font-size:7.2vh;font-weight:300;line-height:1;margin:.2vh 0}
-  #calMonth{font-size:1.75vh;color:var(--sub);text-transform:capitalize}
-  #calWeek{font-size:1.45vh;color:var(--faint);margin-top:auto}
+  #calDay{color:var(--red);font-weight:700;font-size:calc(1.6vh*var(--fs));text-transform:uppercase;letter-spacing:.04em}
+  #calNum{font-size:calc(4.6vh*var(--fs));font-weight:300;line-height:1;margin:.2vh 0}
+  #calMonth{font-size:calc(1.75vh*var(--fs));color:var(--sub);text-transform:capitalize}
+  #calWeek{font-size:calc(1.45vh*var(--fs));color:var(--faint);margin-top:auto}
 
   /* ---------- weer (macOS-stijl) ---------- */
   #weather{flex:0 0 auto;height:34vh;display:flex;flex-direction:column;border:none;
@@ -83,53 +84,53 @@
   #weather.rain{background:linear-gradient(180deg,#3f4d63,#64748b)}
   #weather.rain.night{background:linear-gradient(180deg,#1b2230,#384357)}
   .wx-top{display:flex;justify-content:space-between}
-  #wxCity{font-size:2vh;font-weight:600}
-  #wxTemp{font-size:7.5vh;font-weight:300;line-height:1;margin-top:.3vh;letter-spacing:-.02em}
-  #wxIcon{font-size:4vh;text-align:right}
-  #wxDesc{font-size:1.75vh;font-weight:600;text-align:right;margin-top:.4vh}
-  #wxHL{font-size:1.75vh;font-weight:500;text-align:right;color:rgba(255,255,255,.85)}
-  #wxMeta{display:flex;gap:1.6vh;font-size:1.5vh;color:rgba(255,255,255,.8);margin-top:.8vh}
+  #wxCity{font-size:calc(2vh*var(--fs));font-weight:600}
+  #wxTemp{font-size:calc(6.4vh*var(--fs));font-weight:300;line-height:1;margin-top:.3vh;letter-spacing:-.02em}
+  #wxIcon{font-size:calc(4vh*var(--fs));text-align:right}
+  #wxDesc{font-size:calc(1.75vh*var(--fs));font-weight:600;text-align:right;margin-top:.4vh}
+  #wxHL{font-size:calc(1.75vh*var(--fs));font-weight:500;text-align:right;color:rgba(255,255,255,.85)}
+  #wxMeta{display:flex;flex-wrap:wrap;gap:.4vh 1.6vh;white-space:nowrap;margin-bottom:1vh;font-size:calc(1.5vh*var(--fs));color:rgba(255,255,255,.8);margin-top:.8vh}
   #hourly{display:grid;grid-template-columns:repeat(6,1fr);margin-top:auto;text-align:center;border-top:1px solid rgba(255,255,255,.22);padding-top:1.1vh}
-  #hourly .h{font-size:1.5vh;font-weight:600;color:rgba(255,255,255,.85)}
-  #hourly .i{font-size:2.7vh;margin:.4vh 0}
-  #hourly .t{font-size:1.9vh;font-weight:600}
-  #hourly .p{font-size:1.3vh;color:#bfe3ff;font-weight:600;min-height:1.6vh}
+  #hourly .h{font-size:calc(1.5vh*var(--fs));font-weight:600;color:rgba(255,255,255,.85)}
+  #hourly .i{font-size:calc(2.2vh*var(--fs));margin:.4vh 0}
+  #hourly .t{font-size:calc(1.9vh*var(--fs));font-weight:600}
+  #hourly .p{font-size:calc(1.3vh*var(--fs));color:#bfe3ff;font-weight:600;min-height:1.6vh}
 
   /* ---------- radar + regen ---------- */
   #radarW{flex:1;display:flex;flex-direction:column}
   #radarBox{flex:1;min-height:0;border-radius:1.6vh;overflow:hidden;background:rgba(0,0,0,.25);position:relative}
   #radar{width:100%;height:100%;object-fit:cover;object-position:28% 58%;display:block}
-  #radarErr{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:var(--sub);font-size:1.6vh;text-align:center;padding:2vh}
-  #rainText{font-size:1.8vh;font-weight:600;margin-top:1.2vh}
+  #radarErr{display:none;position:absolute;inset:0;align-items:center;justify-content:center;color:var(--sub);font-size:calc(1.6vh*var(--fs));text-align:center;padding:2vh}
+  #rainText{font-size:calc(1.8vh*var(--fs));font-weight:600;margin-top:1.2vh}
   #rainBars{display:flex;align-items:flex-end;gap:.5vh;height:4.6vh;margin-top:.8vh}
   #rainBars div{flex:1;background:var(--teal);border-radius:.5vh .5vh .15vh .15vh;min-height:3px}
-  #rainAxis{display:flex;justify-content:space-between;font-size:1.3vh;color:var(--faint);margin-top:.4vh;font-variant-numeric:tabular-nums}
+  #rainAxis{display:flex;justify-content:space-between;font-size:calc(1.3vh*var(--fs));color:var(--faint);margin-top:.4vh;font-variant-numeric:tabular-nums}
 
   /* ---------- nieuws ---------- */
   #newsW{flex:1.55;display:flex;flex-direction:column}
   .news-body{flex:1;display:flex;gap:2vh;min-height:0}
-  #feat{flex:0 0 44%;display:flex;flex-direction:column;min-height:0;cursor:pointer}
-  #featImg{width:100%;aspect-ratio:16/9;border-radius:1.4vh;object-fit:cover;background:rgba(255,255,255,.06);display:block}
-  #featTitle{font-size:2.5vh;font-weight:700;line-height:1.2;margin-top:1.2vh}
-  #featDesc{font-size:1.65vh;color:var(--sub);line-height:1.35;margin-top:.7vh;overflow:hidden;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical}
-  #featMeta{font-size:1.4vh;color:var(--faint);margin-top:auto;padding-top:.8vh}
+  #feat{flex:0 0 46%;display:flex;flex-direction:column;min-height:0;cursor:pointer}
+  #featImg{width:100%;flex:1 1 0;min-height:0;border-radius:1.4vh;object-fit:cover;background:rgba(255,255,255,.06);display:block}
+  #featTitle{font-size:calc(2.15vh*var(--fs));font-weight:700;line-height:1.2;margin-top:1.2vh;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;flex:0 0 auto}
+  #featDesc{font-size:calc(1.65vh*var(--fs));color:var(--sub);line-height:1.35;margin-top:.7vh;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;flex:0 0 auto}
+  #featMeta{font-size:calc(1.4vh*var(--fs));color:var(--faint);padding-top:.8vh}
   #dots{display:flex;gap:.6vh;margin-top:.8vh}
   #dots span{width:.7vh;height:.7vh;border-radius:50%;background:var(--faint)}
   #dots span.on{background:var(--text)}
   #newsList{flex:1;list-style:none;margin:0;padding:0;overflow:hidden}
-  #newsList li{padding:1vh 0;border-top:1px solid rgba(255,255,255,.08);font-size:1.8vh;line-height:1.3;font-weight:500;display:flex;gap:1.2vh}
+  #newsList li{padding:1vh 0;border-top:1px solid rgba(255,255,255,.08);font-size:calc(1.8vh*var(--fs));line-height:1.3;font-weight:500;display:flex;gap:1.2vh}
   #newsList li:first-child{border-top:none;padding-top:0}
-  #newsList .ago{flex:0 0 5vh;font-size:1.4vh;color:var(--faint);font-weight:500;padding-top:.25vh;font-variant-numeric:tabular-nums}
+  #newsList .ago{flex:0 0 7vh;white-space:nowrap;font-size:calc(1.4vh*var(--fs));color:var(--faint);font-weight:500;padding-top:.25vh;font-variant-numeric:tabular-nums}
   .fade{animation:fade .7s ease}
   @keyframes fade{from{opacity:0;transform:translateY(.5vh)}to{opacity:1;transform:none}}
-  .nos{background:#e61e14;color:#fff;font-weight:800;font-size:1.3vh;padding:.2vh .7vh;border-radius:.5vh;letter-spacing:.04em}
+  .nos{background:#e61e14;color:#fff;font-weight:800;font-size:calc(1.3vh*var(--fs));padding:.2vh .7vh;border-radius:.5vh;letter-spacing:.04em}
 
   /* ---------- weetjes ---------- */
   #factW{flex:1;display:flex;flex-direction:column;cursor:pointer}
-  #factKind{font-size:1.45vh;font-weight:600;color:var(--orange)}
+  #factKind{font-size:calc(1.45vh*var(--fs));font-weight:600;color:var(--orange)}
   #factImg{width:100%;height:13vh;object-fit:cover;border-radius:1.4vh;margin:1vh 0 0;display:none}
-  #factTitle{font-size:2.2vh;font-weight:700;margin-top:1vh;line-height:1.2}
-  #factText{font-size:1.85vh;line-height:1.4;margin-top:.8vh;color:rgba(255,255,255,.88);overflow:hidden;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical}
+  #factTitle{font-size:calc(2.2vh*var(--fs));font-weight:700;margin-top:1vh;line-height:1.2}
+  #factText{font-size:calc(1.85vh*var(--fs));line-height:1.4;margin-top:.8vh;color:rgba(255,255,255,.88);overflow:hidden;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical}
   #factBar{position:absolute;left:2.1vh;right:2.1vh;bottom:1.4vh;height:.35vh;border-radius:1vh;background:rgba(255,255,255,.1);overflow:hidden}
   #factBar div{height:100%;width:0;background:var(--orange);border-radius:1vh}
 
@@ -140,25 +141,25 @@
   #flSide{flex:0 0 34%;padding:1.8vh 2vh;display:flex;flex-direction:column;background:var(--glass-strong);border-left:1px solid var(--stroke)}
   .flStats{display:flex;gap:2.4vh;margin-bottom:1.2vh}
   .flStats>div{min-width:0}
-  .flStats .n{font-size:3.2vh;font-weight:700;line-height:1;white-space:nowrap}
-  .flStats .l{font-size:1.3vh;color:var(--sub);margin-top:.3vh;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:14vh}
+  .flStats .n{font-size:calc(3.2vh*var(--fs));font-weight:700;line-height:1;white-space:nowrap}
+  .flStats .l{font-size:calc(1.3vh*var(--fs));color:var(--sub);margin-top:.3vh;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:14vh}
   #flTable{font-variant-numeric:tabular-nums;overflow:hidden}
   .fl{padding:.75vh 0;border-top:1px solid rgba(255,255,255,.07)}
   .fl:first-child{border-top:none;padding-top:0}
   .fl .a,.fl .b{display:flex;justify-content:space-between;gap:1vh;white-space:nowrap}
-  .fl .a{font-size:1.65vh}
-  .fl .b{font-size:1.45vh;color:var(--sub);margin-top:.25vh}
+  .fl .a{font-size:calc(1.65vh*var(--fs))}
+  .fl .b{font-size:calc(1.45vh*var(--fs));color:var(--sub);margin-top:.25vh}
   .fl .cs{font-weight:700}
   .fl .ty{color:var(--sub);font-weight:400;margin-left:.6vh}
   .fl .route{overflow:hidden;text-overflow:ellipsis}
   .fl .route b{color:var(--text);font-weight:600}
   .fl .r{color:var(--sub)}
-  #flMsg{font-size:1.5vh;color:var(--sub);margin-top:auto;padding-top:.6vh}
-  .plane-label{background:none;border:none;box-shadow:none;color:#fff;font:600 11px var(--font);text-shadow:0 0 3px #000,0 0 3px #000;padding:0}
+  #flMsg{font-size:calc(1.5vh*var(--fs));color:var(--sub);margin-top:auto;padding-top:.6vh}
+  .plane-label{background:none;border:none;box-shadow:none;color:#fff;font:600 16px var(--font);text-shadow:0 0 3px #000,0 0 3px #000;padding:0}
   .plane-label:before{display:none}
-  .leaflet-control-attribution{background:rgba(0,0,0,.45)!important;color:rgba(255,255,255,.4)!important;font-size:9px!important}
+  .leaflet-control-attribution{background:rgba(0,0,0,.45)!important;color:rgba(255,255,255,.4)!important;font-size:10px!important}
   .leaflet-control-attribution a{color:rgba(255,255,255,.55)!important}
-  .legend{position:absolute;left:1.4vh;bottom:1.4vh;z-index:500;display:flex;gap:1.2vh;font-size:1.3vh;padding:.6vh 1.2vh;border-radius:1vh;
+  .legend{position:absolute;left:1.4vh;bottom:1.4vh;z-index:500;display:flex;gap:1.2vh;font-size:calc(1.3vh*var(--fs));padding:.6vh 1.2vh;border-radius:1vh;
     background:rgba(20,20,26,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--stroke)}
   .legend span:before{content:'';display:inline-block;width:.9vh;height:.9vh;border-radius:50%;margin-right:.5vh;background:var(--c)}
 
@@ -177,7 +178,6 @@
   <span class="st"><i id="sWeather" class="wait"></i>weer</span>
   <span class="st"><i id="sRadar" class="wait"></i>radar</span>
   <span class="st"><i id="sNews" class="wait"></i>NOS</span>
-  <span class="st"><i id="sFacts" class="wait"></i>weetjes</span>
   <span class="st"><i id="sFlights" class="wait"></i>vluchten</span>
   <span id="dimBtn" title="Nachtstand">☾</span>
   <span id="mbClock">–</span>
@@ -239,13 +239,6 @@
         <ul id="newsList"></ul>
       </div>
     </div>
-    <div class="w" id="factW">
-      <div class="wt">Wist je dat? <b id="factKind"></b></div>
-      <img id="factImg" alt="">
-      <div id="factTitle"></div>
-      <div id="factText">laden…</div>
-      <div id="factBar"><div></div></div>
-    </div>
   </div>
 
   <!-- ONDER -->
@@ -259,11 +252,6 @@
       </div>
       <div id="flSide">
         <div class="wt" style="margin-bottom:1.2vh">Boven je hoofd <b id="flSrc"></b></div>
-        <div class="flStats">
-          <div><div class="n" id="flCount">–</div><div class="l">in de lucht</div></div>
-          <div><div class="n" id="flHigh">–</div><div class="l" id="flHighL">hoogste</div></div>
-          <div><div class="n" id="flFast">–</div><div class="l" id="flFastL">snelste</div></div>
-        </div>
         <div id="flTable"></div>
         <div id="flMsg"></div>
       </div>
@@ -351,7 +339,7 @@ function tick() {
   $('mbClock').textContent = d.toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short' }) + '  ' + hhmm(d);
   $('calDay').textContent = d.toLocaleDateString('nl-NL', { weekday: 'long' });
   $('calNum').textContent = d.getDate();
-  $('calMonth').textContent = d.toLocaleDateString('nl-NL', { month: 'long', year: 'numeric' });
+  $('calMonth').textContent = d.toLocaleDateString('nl-NL', { month: 'long' });
   $('calWeek').textContent = 'week ' + isoWeek(d);
   const night = h >= NIGHT_FROM || h < NIGHT_TO;
   $('dim').classList.toggle('on', Date.now() < dimUntil ? dimManual : night);
@@ -387,10 +375,9 @@ async function loadWeather() {
     $('wxHL').textContent = 'H:' + Math.round(d.daily.temperature_2m_max[0]) + '°  L:' + Math.round(d.daily.temperature_2m_min[0]) + '°';
     const sr = new Date(d.daily.sunrise[0]), ss = new Date(d.daily.sunset[0]);
     $('wxMeta').innerHTML =
-      '<span>💨 ' + compass(c.wind_direction_10m) + ' ' + beaufort(c.wind_speed_10m) + ' Bft · stoten ' + Math.round(c.wind_gusts_10m) + '</span>' +
+      '<span>💨 ' + compass(c.wind_direction_10m) + ' ' + beaufort(c.wind_speed_10m) + ' Bft</span>' +
       '<span>💧 ' + c.relative_humidity_2m + '%</span>' +
-      '<span>' + Math.round(c.pressure_msl) + ' hPa</span>' +
-      '<span>🌅 ' + hhmm(sr) + ' – ' + hhmm(ss) + '</span>';
+            '<span>🌅 ' + hhmm(sr) + ' – ' + hhmm(ss) + '</span>';
 
     // komende uren
     const now = Date.now(), ht = d.hourly.time.map(t => new Date(t).getTime());
@@ -472,7 +459,7 @@ function renderNews() {
   $('featDesc').textContent = f.desc;
   $('featMeta').textContent = ago(f.t) ? ago(f.t) + ' geleden' : '';
   $('dots').innerHTML = Array.from({ length: nFeat }, (_, i) => '<span class="' + (i === featIdx % nFeat ? 'on' : '') + '"></span>').join('');
-  $('newsList').innerHTML = news.filter((_, i) => i !== featIdx % nFeat).slice(0, 9)
+  $('newsList').innerHTML = news.filter((_, i) => i !== featIdx % nFeat).slice(0, 7)
     .map(i => '<li><span class="ago">' + esc(ago(i.t)) + '</span><span>' + esc(i.title) + '</span></li>').join('');
   $('newsUpd').textContent = newsLoadedAt ? 'bijgewerkt ' + hhmm(new Date(newsLoadedAt)) : '';
 }
@@ -548,12 +535,10 @@ async function showFact() {
   const img = $('factImg');
   if (f.img) { img.src = f.img; img.style.display = 'block'; img.onerror = () => { img.style.display = 'none'; }; } else img.style.display = 'none';
   $('factText').style.webkitLineClamp = f.img ? 4 : (f.title ? 7 : 9);
-  $('factText').style.fontSize = (!f.img && !f.title && f.text.length < 140) ? '2.5vh' : '';
+  $('factText').style.fontSize = (!f.img && !f.title && f.text.length < 140) ? 'calc(2.5vh*var(--fs))' : '';
   factStart = Date.now();
   factTimer = setTimeout(showFact, FACT_SECONDS * 1000);
 }
-$('factW').addEventListener('click', showFact);
-setInterval(() => { $('factBar').firstElementChild.style.width = Math.min(100, (Date.now() - factStart) / (FACT_SECONDS * 10)) + '%'; }, 500);
 
 /* ===================== VLUCHTEN ===================== */
 function initFlights() {
@@ -568,7 +553,7 @@ L.circleMarker([HOME.lat, HOME.lon], { radius: 6, color: '#fff', weight: 2, fill
 [10, 25, 50].forEach(km => L.circle([HOME.lat, HOME.lon], { radius: km * 1000, color: '#fff', weight: 1, opacity: .18, fill: false, dashArray: '3 6' }).addTo(map));
 [['RTM', 51.9569, 4.4372], ['AMS', 52.3086, 4.7639]].forEach(([n, la, lo]) =>
   L.marker([la, lo], { interactive: false, icon: L.divIcon({ className: '', iconSize: null,
-    html: '<div style="font:600 10px Inter,sans-serif;color:rgba(255,255,255,.65);background:rgba(20,20,26,.7);border:1px solid rgba(255,255,255,.15);padding:1px 5px;border-radius:5px">✈ ' + n + '</div>' }) }).addTo(map));
+    html: '<div style="font:600 14px Inter,sans-serif;color:rgba(255,255,255,.65);background:rgba(20,20,26,.7);border:1px solid rgba(255,255,255,.15);padding:1px 5px;border-radius:5px">✈ ' + n + '</div>' }) }).addTo(map));
 // kaart netjes laten passen zodra de layout klaar is
 setTimeout(() => map.invalidateSize(), 300);
 window.addEventListener('resize', () => map.invalidateSize());
@@ -622,7 +607,7 @@ const ROUTES = [];
 for (const p of PROXIES) for (const n of SRC_ORDER) ROUTES.push({ src: SOURCES.find(s => s.name === n), proxy: p });
 
 const planes = new Map();
-let flightTimer;
+let flightTimer, failCount = 0, lastOkAt = 0;
 const routeKey = r => r.src.name + '|' + r.proxy.name;
 let routeIdx = (() => { try { const k = localStorage.getItem('flRoute'); const i = ROUTES.findIndex(r => routeKey(r) === k); return i >= 0 ? i : null; } catch { return null; } })();
 function rememberRoute(i) { routeIdx = i; try { localStorage.setItem('flRoute', routeKey(ROUTES[i])); } catch {} }
@@ -655,11 +640,17 @@ async function loadFlights() {
     $('flSrc').textContent = 'via ' + route.src.name + (route.proxy.name !== 'direct' ? ' · ' + route.proxy.name : '');
     $('flMsg').textContent = ''; setStatus('Flights', 'ok');
   } else {
-    setStatus('Flights', 'err'); $('flSrc').textContent = '';
-    $('flMsg').innerHTML = '⚠️ Geen vluchtdata (' + ROUTES.length + ' routes geprobeerd).<br>' + errors.slice(-4).map(esc).join('<br>');
+    failCount++;
+    setStatus('Flights', lastOkAt ? 'wait' : 'err');
+    const wait = Math.min(300e3, 30e3 * 2 ** (failCount - 1));
+    $('flMsg').innerHTML = lastOkAt
+      ? '⏳ Bron even niet bereikbaar. Laatste data van ' + hhmm(new Date(lastOkAt)) + ', nieuwe poging over ' + Math.round(wait / 60e3 * 10) / 10 + ' min.'
+      : '⚠️ Geen vluchtdata. ' + errors.slice(-2).map(esc).join('<br>');
   }
-  // via een publieke proxy wat rustiger verversen, om niet geblokkeerd te worden
-  const every = !list ? 60e3 : Math.max(route.src.every, route.proxy.name === 'direct' || route.proxy.name === 'eigen proxy' ? 0 : 20e3);
+  if (list) { failCount = 0; lastOkAt = Date.now(); }
+  // via een publieke proxy rustig verversen (30 s), anders word je afgeknepen; bij fouten steeds langer wachten (max 5 min)
+  const every = !list ? Math.min(300e3, 30e3 * 2 ** (failCount - 1))
+    : Math.max(route.src.every, route.proxy.name === 'direct' || route.proxy.name === 'eigen proxy' ? 0 : 30e3);
   flightTimer = setTimeout(loadFlights, every);
 }
 
@@ -752,29 +743,39 @@ function updatePlanes(list) {
   renderSide();
 }
 let lastAir = [];
+const AIRLINES = {
+  KLM:'KLM', KLC:'KLM Cityhopper', TRA:'Transavia', TVF:'Transavia France', MPH:'Martinair', CND:'Corendon', CAI:'Corendon', TFL:'TUI', TOM:'TUI', JAF:'TUI',
+  EZY:'easyJet', EJU:'easyJet', EZS:'easyJet', RYR:'Ryanair', RUK:'Ryanair', MAY:'Ryanair', LDM:'Lauda', WZZ:'Wizz Air', WMT:'Wizz Air', WUK:'Wizz Air',
+  BAW:'British Airways', SHT:'British Airways', CFE:'BA CityFlyer', VIR:'Virgin Atlantic', EXS:'Jet2', LOG:'Loganair', EIN:'Aer Lingus', EAI:'Emerald Airlines',
+  DLH:'Lufthansa', CLH:'Lufthansa CityLine', EWG:'Eurowings', AFR:'Air France', HOP:'Air France', IBE:'Iberia', IBS:'Iberia Express', VLG:'Vueling', AEA:'Air Europa',
+  SWR:'Swiss', AUA:'Austrian', BEL:'Brussels Airlines', SAS:'SAS', NAX:'Norwegian', NSZ:'Norwegian', FIN:'Finnair', ICE:'Icelandair', TAP:'TAP Portugal',
+  ITY:'ITA Airways', AEE:'Aegean', LOT:'LOT', CSA:'Czech Airlines', THY:'Turkish Airlines', PGT:'Pegasus', SXS:'SunExpress', ENT:'Enter Air',
+  UAE:'Emirates', QTR:'Qatar Airways', ETD:'Etihad', SVA:'Saudia', ELY:'El Al', DAL:'Delta', UAL:'United', AAL:'American Airlines', ACA:'Air Canada',
+  CPA:'Cathay Pacific', SIA:'Singapore Airlines', KAL:'Korean Air', CCA:'Air China', CES:'China Eastern', CSN:'China Southern', MAS:'Malaysia Airlines',
+  BCS:'DHL', DHK:'DHL', BOX:'AeroLogic', FDX:'FedEx', UPS:'UPS', CLX:'Cargolux', ABR:'ASL Airlines', GEC:'Lufthansa Cargo', CKS:'Kalitta Air',
+  NJE:'NetJets', VJT:'VistaJet', RCH:'US Air Force', NATO:'NAVO'
+};
+function airlineOf(p, i) {
+  if (i && i.airline) return i.airline;
+  const m = /^([A-Z]{3})\d/.exec(p.cs);
+  if (m && AIRLINES[m[1]]) return AIRLINES[m[1]];
+  if (/^PH[A-Z]{3}$/.test(p.cs)) return 'Nederlands privétoestel';
+  if (i && i.owner) return i.owner;
+  return m ? m[1] : 'Onbekend';
+}
 function renderSide() {
   const air = lastAir.slice();
-  $('flCount').textContent = air.length;
-  const hi = air.filter(p => p.altM != null).sort((a, b) => b.altM - a.altM)[0];
-  const fast = air.filter(p => p.spd != null).sort((a, b) => b.spd - a.spd)[0];
-  $('flHigh').textContent = hi ? (hi.altM / 1000).toFixed(1).replace('.', ',') + ' km' : '–'; $('flHighL').textContent = hi ? 'hoogste · ' + hi.cs : 'hoogste';
-  $('flFast').textContent = fast ? Math.round(fast.spd) : '–';                               $('flFastL').textContent = fast ? 'km/u · ' + fast.cs : 'snelste';
-
-  const near = air.sort((a, b) => a.dist - b.dist).slice(0, 5);
+  const near = air.sort((a, b) => a.dist - b.dist).slice(0, 6);
   near.forEach(wantInfo);
   $('flTable').innerHTML = near.map(p => {
     const i = infoOf(p) || {};
-    const vr = p.vr == null ? '' : p.vr > 300 ? ' ↗' : p.vr < -300 ? ' ↘' : '';
-    const type = p.type || i.type || '';
     let route;
-    if (i.from && i.to) {
-      const f = i.from.city || i.from.code, t = i.to.city || i.to.code;
-      route = '<b>' + esc(f) + '</b> → <b>' + esc(t) + '</b>';
-    } else route = esc(i.airline || i.owner || (queued.has(p.id + '|' + p.cs) ? 'route opzoeken…' : 'route onbekend'));
+    if (i.from && i.to) route = '<b>' + esc(i.from.city || i.from.code) + '</b> → <b>' + esc(i.to.city || i.to.code) + '</b>';
+    else route = queued.has(p.id + '|' + p.cs) ? 'route opzoeken…' : 'route onbekend';
     return '<div class="fl">' +
-      '<div class="a"><span><span style="color:' + altColor(p.altM) + '">●</span> <span class="cs">' + esc(p.cs) + '</span><span class="ty">' + esc(type) + '</span></span>' +
-      '<span class="r">' + (p.altM != null ? Math.round(p.altM).toLocaleString('nl-NL') + ' m' + vr : '–') + '</span></div>' +
-      '<div class="b"><span class="route">' + route + '</span><span>' + p.dist.toFixed(0) + ' km ' + compass(bearing(HOME.lat, HOME.lon, p.lat, p.lon)) + '</span></div>' +
+      '<div class="a"><span><span style="color:' + altColor(p.altM) + '">●</span> <span class="cs">' + esc(airlineOf(p, i)) + '</span></span>' +
+      '<span class="r">' + esc(p.cs) + '</span></div>' +
+      '<div class="b"><span class="route">' + route + '</span></div>' +
       '</div>';
   }).join('') || '<div class="fl" style="color:var(--sub)">Niets in de buurt</div>';
 }
@@ -783,7 +784,7 @@ setInterval(() => {
   const now = Date.now();
   for (const e of planes.values()) {
     const p = e.p; if (!p || p.ground || p.spd == null || p.trk == null) continue;
-    const dt = Math.min(60, (now - e.t) / 1000), dist = p.spd / 3.6 * dt, r = p.trk * Math.PI / 180;
+    const dt = Math.min(300, (now - e.t) / 1000), dist = p.spd / 3.6 * dt, r = p.trk * Math.PI / 180;
     e.marker.setLatLng([e.base[0] + dist * Math.cos(r) / 111320, e.base[1] + dist * Math.sin(r) / (111320 * Math.cos(e.base[0] * Math.PI / 180))]);
   }
 }, 1000);
@@ -796,7 +797,6 @@ loadWeather(); setInterval(loadWeather, 10 * 60e3);
 loadRadar();   setInterval(() => { radarIdx = 0; loadRadar(); }, 5 * 60e3);
 loadNews();    setInterval(loadNews, 10 * 60e3);
 setInterval(() => { featIdx++; renderNews(); }, NEWS_FEATURE_SECONDS * 1000);
-showFact();
 if (window.L) initFlights();
 else { setStatus('Flights', 'err'); $('flMsg').textContent = '⚠️ Kaartbibliotheek kon niet laden – check de internetverbinding.'; setTimeout(() => location.reload(), 60e3); }
 setTimeout(() => location.reload(), 6 * 3600e3); // elke 6 uur verse start
