@@ -69,6 +69,11 @@
   /* ---------- klok + kalender ---------- */
   .row2{display:flex;gap:1.6vh;height:19vh;flex:0 0 auto}
   .row2 .w{flex:1;padding:1.4vh;display:flex;align-items:center;justify-content:center}
+  #clockW{flex-direction:column;align-items:flex-start!important;justify-content:center!important;padding:1.6vh 2.4vh!important}
+  #dClock{font-size:calc(6.6vh*var(--fs));font-weight:300;line-height:1;letter-spacing:-.01em;font-variant-numeric:lining-nums tabular-nums;color:var(--text);white-space:nowrap}
+  #dSec{font-size:.42em;font-weight:600;color:var(--orange);margin-left:.4vh;display:inline-block;min-width:1.9em}
+  #dDate{font-size:calc(1.75vh*var(--fs));color:var(--sub);margin-top:1vh;white-space:nowrap}
+  #dDay{color:var(--orange);font-weight:700;text-transform:capitalize}
   #analog{height:100%;aspect-ratio:1}
   .cal{flex-direction:column;align-items:flex-start!important;justify-content:flex-start!important;padding:1.6vh 1.9vh!important}
   #calDay{color:var(--red);font-weight:700;font-size:calc(1.6vh*var(--fs));text-transform:uppercase;letter-spacing:.04em}
@@ -119,9 +124,11 @@
   #dots{display:flex;gap:.6vh;margin-top:.8vh}
   #dots span{width:.7vh;height:.7vh;border-radius:50%;background:var(--faint)}
   #dots span.on{background:var(--text)}
-  #newsList{flex:1;list-style:none;margin:0;padding:0;overflow:hidden}
-  #newsList li{padding:1vh 0;border-top:1px solid rgba(255,255,255,.08);font-size:calc(1.8vh*var(--fs));line-height:1.3;font-weight:500;display:flex;gap:1.2vh}
-  #newsList li:first-child{border-top:none;padding-top:0}
+  #newsList{flex:1;list-style:none;margin:0;padding:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;column-gap:3.2vh;align-content:start}
+  #newsList li{padding:1.1vh 0;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:1.4vh;break-inside:avoid}
+  #newsList .nt{font-size:calc(1.75vh*var(--fs));line-height:1.25;font-weight:700;color:var(--text)}
+  #newsList .nd{font-size:calc(1.45vh*var(--fs));line-height:1.35;color:var(--sub);margin-top:.4vh;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+  #newsList li:nth-child(-n+2){border-top:none;padding-top:0}
   #newsList .ago{flex:0 0 7vh;white-space:nowrap;font-size:calc(1.4vh*var(--fs));color:var(--faint);font-weight:500;padding-top:.25vh;font-variant-numeric:tabular-nums}
   .fade{animation:fade .7s ease}
   @keyframes fade{from{opacity:0;transform:translateY(.5vh)}to{opacity:1;transform:none}}
@@ -203,12 +210,22 @@
   #calDay{color:var(--pf-orange)}
   #calNum{color:var(--pf-navy)}
   /* weer: blauw van de huisstijl, 's nachts navy */
-  #weather{background:linear-gradient(160deg,#096AD0,#3f8fe3);color:#fff}
-  #weather.night{background:linear-gradient(160deg,#112E48,#1f4a73)}
-  #weather.cloudy{background:linear-gradient(160deg,#4f6f8f,#7c97b3)}
-  #weather.cloudy.night{background:linear-gradient(160deg,#112E48,#33506e)}
-  #weather.rain{background:linear-gradient(160deg,#35577a,#5f7f9f)}
-  #weather.rain.night{background:linear-gradient(160deg,#0c2236,#2b4661)}
+  /* dag */
+  #weather{background:linear-gradient(160deg,#096AD0 0%,#2b84e6 60%,#5aa2ef 100%);color:#fff}
+  #weather.partly{background:linear-gradient(160deg,#1f6fbf 0%,#4f87bd 60%,#86a8c9 100%)}
+  #weather.cloudy{background:linear-gradient(160deg,#5c7590 0%,#7d93aa 60%,#9fb0c2 100%)}
+  #weather.rain{background:linear-gradient(160deg,#2f4d6c 0%,#466683 60%,#62809b 100%)}
+  #weather.snow{background:linear-gradient(160deg,#7f9cbc 0%,#a9bfd6 60%,#cfdbe8 100%)}
+  #weather.storm{background:linear-gradient(160deg,#112E48 0%,#2a3f57 65%,#5a4a3a 100%);box-shadow:inset 0 -6vh 6vh -3vh rgba(242,146,1,.45),0 1vh 3.5vh rgba(17,46,72,.18)}
+  /* nacht */
+  #weather.night{background:linear-gradient(160deg,#0b1f33 0%,#112E48 55%,#1f4a73 100%)}
+  #weather.partly.night{background:linear-gradient(160deg,#0f2338 0%,#1d3854 60%,#33506e 100%)}
+  #weather.cloudy.night{background:linear-gradient(160deg,#18283a 0%,#2a3c50 60%,#3e5166 100%)}
+  #weather.rain.night{background:linear-gradient(160deg,#0a1726 0%,#1a2c40 60%,#2b4158 100%)}
+  #weather.snow.night{background:linear-gradient(160deg,#1c2f45 0%,#3a5470 60%,#5c7894 100%)}
+  #weather.storm.night{background:linear-gradient(160deg,#070f1a 0%,#14243a 65%,#3a2c1c 100%);box-shadow:inset 0 -6vh 6vh -3vh rgba(242,146,1,.5),0 1vh 3.5vh rgba(17,46,72,.18)}
+  /* regen/onweer: oranje accent op de temperatuurregel */
+  #weather.rain #wxDesc, #weather.storm #wxDesc{color:#ffc164}
   #weather, #weather *{color:#fff}
   #hourly .p{color:#ffd28a!important}
   #radarBox{background:rgba(17,46,72,.06)}
@@ -248,12 +265,9 @@
   <!-- LINKS -->
   <div class="left">
     <div class="row2">
-      <div class="w"><svg id="analog" viewBox="0 0 100 100"></svg></div>
-      <div class="w cal">
-        <div id="calDay">–</div>
-        <div id="calNum">–</div>
-        <div id="calMonth">–</div>
-        <div id="calWeek">–</div>
+      <div class="w" id="clockW">
+        <div id="dClock">--:--<span id="dSec">:--</span></div>
+        <div id="dDate"><span id="dDay">–</span> <span id="dRest"></span></div>
       </div>
     </div>
 
@@ -289,16 +303,7 @@
   <div class="top">
     <div class="w" id="newsW">
       <div class="wt"><span><span class="nos">NOS</span>&nbsp; Nieuws</span><b id="newsUpd"></b></div>
-      <div class="news-body">
-        <div id="feat">
-          <img id="featImg" alt="">
-          <div id="featTitle">Nieuws laden…</div>
-          <div id="featDesc"></div>
-          <div id="featMeta"></div>
-          <div id="dots"></div>
-        </div>
-        <ul id="newsList"></ul>
-      </div>
+      <ul id="newsList"></ul>
     </div>
   </div>
 
@@ -375,35 +380,16 @@ function beaufort(kmh) { const lim = [1,6,12,20,29,39,50,62,75,89,103,118]; let 
 function isoWeek(d) { const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())); const day = t.getUTCDay() || 7;
   t.setUTCDate(t.getUTCDate() + 4 - day); const y0 = new Date(Date.UTC(t.getUTCFullYear(), 0, 1)); return Math.ceil(((t - y0) / 864e5 + 1) / 7); }
 
-/* ===================== ANALOGE KLOK ===================== */
-(function buildClock() {
-  let s = '<circle cx="50" cy="50" r="48" fill="#fff"/>';
-  for (let i = 0; i < 60; i++) {
-    const a = i * 6 * Math.PI / 180, big = i % 5 === 0, r1 = big ? 40 : 43, r2 = 45;
-    s += '<line x1="' + (50 + r1 * Math.sin(a)) + '" y1="' + (50 - r1 * Math.cos(a)) + '" x2="' + (50 + r2 * Math.sin(a)) + '" y2="' + (50 - r2 * Math.cos(a)) +
-         '" stroke="' + (big ? '#1c1c1e' : '#c7c7cc') + '" stroke-width="' + (big ? 1.6 : .7) + '" stroke-linecap="round"/>';
-  }
-  [12, 3, 6, 9].forEach((n, i) => { const a = i * 90 * Math.PI / 180;
-    s += '<text x="' + (50 + 32 * Math.sin(a)) + '" y="' + (50 - 32 * Math.cos(a) + 4) + '" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1c1e" font-family="Raleway,Inter,sans-serif">' + n + '</text>'; });
-  s += '<line id="hH" x1="50" y1="54" x2="50" y2="28" stroke="#1c1c1e" stroke-width="3.4" stroke-linecap="round"/>' +
-       '<line id="hM" x1="50" y1="55" x2="50" y2="14" stroke="#1c1c1e" stroke-width="2.4" stroke-linecap="round"/>' +
-       '<line id="hS" x1="50" y1="58" x2="50" y2="10" stroke="#F29201" stroke-width="1" stroke-linecap="round"/>' +
-       '<circle cx="50" cy="50" r="2.4" fill="#F29201"/><circle cx="50" cy="50" r="1" fill="#fff"/>';
-  $('analog').innerHTML = s;
-})();
 
 /* ===================== KLOK, KALENDER, NACHTSTAND ===================== */
 let dimUntil = 0, dimManual = false;
 function tick() {
   const d = new Date(), h = d.getHours(), m = d.getMinutes(), s = d.getSeconds();
-  $('hH').setAttribute('transform', 'rotate(' + ((h % 12) * 30 + m * .5) + ' 50 50)');
-  $('hM').setAttribute('transform', 'rotate(' + (m * 6 + s * .1) + ' 50 50)');
-  $('hS').setAttribute('transform', 'rotate(' + (s * 6) + ' 50 50)');
+  $('dClock').firstChild.nodeValue = hhmm(d);
+  $('dSec').textContent = ':' + pad(s);
+  $('dDay').textContent = d.toLocaleDateString('nl-NL', { weekday: 'long' });
+  $('dRest').textContent = d.getDate() + ' ' + d.toLocaleDateString('nl-NL', { month: 'long' }) + ' · week ' + isoWeek(d);
   $('mbClock').textContent = d.toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short' }) + '  ' + hhmm(d);
-  $('calDay').textContent = d.toLocaleDateString('nl-NL', { weekday: 'long' });
-  $('calNum').textContent = d.getDate();
-  $('calMonth').textContent = d.toLocaleDateString('nl-NL', { month: 'long' });
-  $('calWeek').textContent = 'week ' + isoWeek(d);
   for (const k of ['Weather', 'Radar', 'News', 'Flights']) { const el = $('t' + k); if (el) el.textContent = lastOk[k] ? shortAgo(lastOk[k]) : ''; }
   const night = h >= NIGHT_FROM || h < NIGHT_TO;
   $('dim').classList.toggle('on', Date.now() < dimUntil ? dimManual : night);
@@ -414,13 +400,13 @@ $('dim').addEventListener('click', toggleDim);
 
 /* ===================== WEER (Open-Meteo) ===================== */
 const WMO = {
-  0:['Onbewolkt','☀️','🌙','clear'],1:['Overwegend helder','🌤️','🌙','clear'],2:['Half bewolkt','⛅','☁️','clear'],3:['Bewolkt','☁️','☁️','cloudy'],
+  0:['Onbewolkt','☀️','🌙','clear'],1:['Overwegend helder','🌤️','🌙','clear'],2:['Half bewolkt','⛅','☁️','partly'],3:['Bewolkt','☁️','☁️','cloudy'],
   45:['Mist','🌫️','🌫️','cloudy'],48:['Rijpmist','🌫️','🌫️','cloudy'],
   51:['Lichte motregen','🌦️','🌧️','rain'],53:['Motregen','🌦️','🌧️','rain'],55:['Dichte motregen','🌧️','🌧️','rain'],
   56:['Lichte ijzel','🌧️','🌧️','rain'],57:['IJzel','🌧️','🌧️','rain'],61:['Lichte regen','🌧️','🌧️','rain'],63:['Regen','🌧️','🌧️','rain'],65:['Zware regen','🌧️','🌧️','rain'],
-  66:['Lichte ijzel','🌧️','🌧️','rain'],67:['IJzel','🌧️','🌧️','rain'],71:['Lichte sneeuw','🌨️','🌨️','rain'],73:['Sneeuw','🌨️','🌨️','rain'],75:['Zware sneeuw','❄️','❄️','rain'],
-  77:['Korrelsneeuw','🌨️','🌨️','rain'],80:['Lichte buien','🌦️','🌧️','rain'],81:['Buien','🌧️','🌧️','rain'],82:['Zware buien','⛈️','⛈️','rain'],
-  85:['Sneeuwbuien','🌨️','🌨️','rain'],86:['Zware sneeuwbuien','❄️','❄️','rain'],95:['Onweer','⛈️','⛈️','rain'],96:['Onweer met hagel','⛈️','⛈️','rain'],99:['Zwaar onweer','⛈️','⛈️','rain']
+  66:['Lichte ijzel','🌧️','🌧️','rain'],67:['IJzel','🌧️','🌧️','rain'],71:['Lichte sneeuw','🌨️','🌨️','snow'],73:['Sneeuw','🌨️','🌨️','snow'],75:['Zware sneeuw','❄️','❄️','snow'],
+  77:['Korrelsneeuw','🌨️','🌨️','snow'],80:['Lichte buien','🌦️','🌧️','rain'],81:['Buien','🌧️','🌧️','rain'],82:['Zware buien','⛈️','⛈️','rain'],
+  85:['Sneeuwbuien','🌨️','🌨️','snow'],86:['Zware sneeuwbuien','❄️','❄️','snow'],95:['Onweer','⛈️','⛈️','storm'],96:['Onweer met hagel','⛈️','⛈️','storm'],99:['Zwaar onweer','⛈️','⛈️','storm']
 };
 const wmo = (c, day = 1) => { const w = WMO[c] || ['–','·','·','clear']; return { txt: w[0], ico: day ? w[1] : w[2], kind: w[3] }; };
 
@@ -510,24 +496,15 @@ async function loadNews() {
   try { const items = (await fetchRSS(NOS_RSS)).filter(i => i.title);
         if (items.length) { news = items; featIdx = 0; newsLoadedAt = Date.now(); renderNews(); }
         setStatus('News', 'ok'); }
-  catch (e) { console.warn('nieuws', e); setStatus('News', 'err'); if (!news.length) $('featTitle').textContent = 'NOS niet bereikbaar – nieuwe poging over 10 min.'; }
+  catch (e) { console.warn('nieuws', e); setStatus('News', 'err'); if (!news.length) $('newsList').innerHTML = '<li>NOS niet bereikbaar – nieuwe poging over 10 min.</li>'; }
 }
 function renderNews() {
   if (!news.length) return;
-  const nFeat = Math.min(5, news.length), f = news[featIdx % nFeat];
-  const fe = $('feat'); fe.classList.remove('fade'); void fe.offsetWidth; fe.classList.add('fade');
-  const img = $('featImg');
-  if (f.img) { img.style.visibility = 'visible'; img.src = f.img; img.onerror = () => { img.style.visibility = 'hidden'; }; }
-  else img.style.visibility = 'hidden';
-  $('featTitle').textContent = f.title;
-  $('featDesc').textContent = f.desc;
-  $('featMeta').textContent = ago(f.t) ? ago(f.t) + ' geleden' : '';
-  $('dots').innerHTML = Array.from({ length: nFeat }, (_, i) => '<span class="' + (i === featIdx % nFeat ? 'on' : '') + '"></span>').join('');
-  $('newsList').innerHTML = news.filter((_, i) => i !== featIdx % nFeat).slice(0, 7)
-    .map(i => '<li><span class="ago">' + esc(ago(i.t)) + '</span><span>' + esc(i.title) + '</span></li>').join('');
+  $('newsList').innerHTML = news.slice(0, 10).map(i =>
+    '<li><span class="ago">' + esc(ago(i.t)) + '</span><div><div class="nt">' + esc(i.title) + '</div>' +
+    (i.desc ? '<div class="nd">' + esc(i.desc) + '</div>' : '') + '</div></li>').join('');
   $('newsUpd').textContent = newsLoadedAt ? 'bijgewerkt ' + hhmm(new Date(newsLoadedAt)) : '';
 }
-$('feat').addEventListener('click', () => { featIdx++; renderNews(); });
 
 /* ===================== WEETJES ===================== */
 const FACTS = [
@@ -657,24 +634,23 @@ const SOURCES = [
 ];
 // De vluchtdiensten laten browsers niet direct ophalen (CORS), dus gaan we via een proxy.
 // Eigen proxy (bv. Cloudflare Worker) hier invullen voor de meest betrouwbare werking, anders leeg laten.
-const MY_PROXY = ''; // voorbeeld: 'https://vluchten.jouwnaam.workers.dev/?url='
-const PROXIES = [
-  ...(MY_PROXY ? [{ name: 'eigen proxy', wrap: u => MY_PROXY + encodeURIComponent(u) }] : []),
+const MY_PROXY = 'https://vluchten.matsgunneweg.workers.dev/?url='; // eigen Cloudflare-proxy
+const PROXIES = MY_PROXY ? [{ name: 'eigen proxy', wrap: u => MY_PROXY + encodeURIComponent(u) }] : [
   { name: 'direct',       wrap: u => u },
   { name: 'allorigins',   wrap: u => 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u) },
   { name: 'codetabs',     wrap: u => 'https://api.codetabs.com/v1/proxy/?quest=' + encodeURIComponent(u) },
   { name: 'corsproxy.io', wrap: u => 'https://corsproxy.io/?url=' + encodeURIComponent(u) }
 ];
 // alle combinaties bron × proxy; adsb.fi en OpenSky eerst, die werken het vaakst via een proxy
-const SRC_ORDER = ['adsb.fi', 'OpenSky', 'adsb.lol', 'airplanes.live'];
+const SRC_ORDER = ['adsb.lol', 'adsb.fi', 'airplanes.live', 'OpenSky'];
 const ROUTES = [];
 for (const p of PROXIES) for (const n of SRC_ORDER) ROUTES.push({ src: SOURCES.find(s => s.name === n), proxy: p });
 
 const planes = new Map();
 let flightTimer, failCount = 0, lastOkAt = 0;
 const routeKey = r => r.src.name + '|' + r.proxy.name;
-let routeIdx = (() => { try { const k = localStorage.getItem('flRoute'); const i = ROUTES.findIndex(r => routeKey(r) === k); return i >= 0 ? i : null; } catch { return null; } })();
-function rememberRoute(i) { routeIdx = i; try { localStorage.setItem('flRoute', routeKey(ROUTES[i])); } catch {} }
+let routeIdx = (() => { try { const k = localStorage.getItem('flRoute2'); const i = ROUTES.findIndex(r => routeKey(r) === k); return i >= 0 ? i : null; } catch { return null; } })();
+function rememberRoute(i) { routeIdx = i; try { localStorage.setItem('flRoute2', routeKey(ROUTES[i])); } catch {} }
 
 // eerste keer: alle routes tegelijk proberen, de snelste wint
 async function raceRoutes() {
@@ -860,7 +836,7 @@ tick(); setInterval(tick, 1000);
 loadWeather(); setInterval(loadWeather, 10 * 60e3);
 loadRadar();   setInterval(() => { radarIdx = 0; loadRadar(); }, 5 * 60e3);
 loadNews();    setInterval(loadNews, 10 * 60e3);
-setInterval(() => { featIdx++; renderNews(); }, NEWS_FEATURE_SECONDS * 1000);
+setInterval(renderNews, 60e3); // 'x min geleden' bijwerken
 if (window.L) initFlights();
 else { setStatus('Flights', 'err'); $('flMsg').textContent = '⚠️ Kaartbibliotheek kon niet laden – check de internetverbinding.'; setTimeout(() => location.reload(), 60e3); }
 setTimeout(() => location.reload(), 6 * 3600e3); // elke 6 uur verse start
