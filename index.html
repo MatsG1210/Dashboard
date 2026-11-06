@@ -84,11 +84,11 @@
   /* ---------- weer (macOS-stijl) ---------- */
   #weather{flex:0 0 auto;height:34vh;display:flex;flex-direction:column;border:none;
     background:linear-gradient(180deg,#2f80ed,#56a0f5);transition:background 2s}
-  #weather.night{background:linear-gradient(180deg,#0f1b3d,#28396b)}
-  #weather.cloudy{background:linear-gradient(180deg,#5b6b82,#8495ad)}
-  #weather.cloudy.night{background:linear-gradient(180deg,#232b3b,#414c61)}
-  #weather.rain{background:linear-gradient(180deg,#3f4d63,#64748b)}
-  #weather.rain.night{background:linear-gradient(180deg,#1b2230,#384357)}
+  #weather.night, #vxNow.night{background:linear-gradient(180deg,#0f1b3d,#28396b)}
+  #weather.cloudy, #vxNow.cloudy{background:linear-gradient(180deg,#5b6b82,#8495ad)}
+  #weather.cloudy.night, #vxNow.cloudy.night{background:linear-gradient(180deg,#232b3b,#414c61)}
+  #weather.rain, #vxNow.rain{background:linear-gradient(180deg,#3f4d63,#64748b)}
+  #weather.rain.night, #vxNow.rain.night{background:linear-gradient(180deg,#1b2230,#384357)}
   .wx-top{display:flex;justify-content:space-between}
   #wxCity{font-size:calc(2vh*var(--fs));font-weight:600}
   #wxTemp{font-size:calc(5.8vh*var(--fs));font-weight:300;line-height:1;margin-top:.3vh;letter-spacing:-.02em}
@@ -124,11 +124,11 @@
   #dots{display:flex;gap:.6vh;margin-top:.8vh}
   #dots span{width:.7vh;height:.7vh;border-radius:50%;background:var(--faint)}
   #dots span.on{background:var(--text)}
-  #newsList{flex:1;list-style:none;margin:0;padding:0;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;column-gap:3.2vh;align-content:start}
+  #newsList{flex:1;min-height:0;list-style:none;margin:0;padding:0 .6vh 0 0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(17,46,72,.25) transparent}
   #newsList li{padding:1.1vh 0;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:1.4vh;break-inside:avoid}
   #newsList .nt{font-size:calc(1.75vh*var(--fs));line-height:1.25;font-weight:700;color:var(--text)}
   #newsList .nd{font-size:calc(1.45vh*var(--fs));line-height:1.35;color:var(--sub);margin-top:.4vh;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-  #newsList li:nth-child(-n+2){border-top:none;padding-top:0}
+  #newsList li:first-child{border-top:none;padding-top:0}
   #newsList .ago{flex:0 0 7vh;white-space:nowrap;font-size:calc(1.4vh*var(--fs));color:var(--faint);font-weight:500;padding-top:.25vh;font-variant-numeric:tabular-nums}
   .fade{animation:fade .7s ease}
   @keyframes fade{from{opacity:0;transform:translateY(.5vh)}to{opacity:1;transform:none}}
@@ -211,22 +211,22 @@
   #calNum{color:var(--pf-navy)}
   /* weer: blauw van de huisstijl, 's nachts navy */
   /* dag */
-  #weather{background:linear-gradient(160deg,#096AD0 0%,#2b84e6 60%,#5aa2ef 100%);color:#fff}
-  #weather.partly{background:linear-gradient(160deg,#1f6fbf 0%,#4f87bd 60%,#86a8c9 100%)}
-  #weather.cloudy{background:linear-gradient(160deg,#5c7590 0%,#7d93aa 60%,#9fb0c2 100%)}
-  #weather.rain{background:linear-gradient(160deg,#2f4d6c 0%,#466683 60%,#62809b 100%)}
-  #weather.snow{background:linear-gradient(160deg,#7f9cbc 0%,#a9bfd6 60%,#cfdbe8 100%)}
-  #weather.storm{background:linear-gradient(160deg,#112E48 0%,#2a3f57 65%,#5a4a3a 100%);box-shadow:inset 0 -6vh 6vh -3vh rgba(242,146,1,.45),0 1vh 3.5vh rgba(17,46,72,.18)}
+  #weather, #vxNow{background:linear-gradient(160deg,#096AD0 0%,#2b84e6 60%,#5aa2ef 100%);color:#fff}
+  #weather.partly, #vxNow.partly{background:linear-gradient(160deg,#1f6fbf 0%,#4f87bd 60%,#86a8c9 100%)}
+  #weather.cloudy, #vxNow.cloudy{background:linear-gradient(160deg,#5c7590 0%,#7d93aa 60%,#9fb0c2 100%)}
+  #weather.rain, #vxNow.rain{background:linear-gradient(160deg,#2f4d6c 0%,#466683 60%,#62809b 100%)}
+  #weather.snow, #vxNow.snow{background:linear-gradient(160deg,#7f9cbc 0%,#a9bfd6 60%,#cfdbe8 100%)}
+  #weather.storm, #vxNow.storm{background:linear-gradient(160deg,#112E48 0%,#2a3f57 65%,#5a4a3a 100%);box-shadow:inset 0 -6vh 6vh -3vh rgba(242,146,1,.45),0 1vh 3.5vh rgba(17,46,72,.18)}
   /* nacht */
-  #weather.night{background:linear-gradient(160deg,#0b1f33 0%,#112E48 55%,#1f4a73 100%)}
-  #weather.partly.night{background:linear-gradient(160deg,#0f2338 0%,#1d3854 60%,#33506e 100%)}
-  #weather.cloudy.night{background:linear-gradient(160deg,#18283a 0%,#2a3c50 60%,#3e5166 100%)}
-  #weather.rain.night{background:linear-gradient(160deg,#0a1726 0%,#1a2c40 60%,#2b4158 100%)}
-  #weather.snow.night{background:linear-gradient(160deg,#1c2f45 0%,#3a5470 60%,#5c7894 100%)}
-  #weather.storm.night{background:linear-gradient(160deg,#070f1a 0%,#14243a 65%,#3a2c1c 100%);box-shadow:inset 0 -6vh 6vh -3vh rgba(242,146,1,.5),0 1vh 3.5vh rgba(17,46,72,.18)}
+  #weather.night, #vxNow.night{background:linear-gradient(160deg,#0b1f33 0%,#112E48 55%,#1f4a73 100%)}
+  #weather.partly.night, #vxNow.partly.night{background:linear-gradient(160deg,#0f2338 0%,#1d3854 60%,#33506e 100%)}
+  #weather.cloudy.night, #vxNow.cloudy.night{background:linear-gradient(160deg,#18283a 0%,#2a3c50 60%,#3e5166 100%)}
+  #weather.rain.night, #vxNow.rain.night{background:linear-gradient(160deg,#0a1726 0%,#1a2c40 60%,#2b4158 100%)}
+  #weather.snow.night, #vxNow.snow.night{background:linear-gradient(160deg,#1c2f45 0%,#3a5470 60%,#5c7894 100%)}
+  #weather.storm.night, #vxNow.storm.night{background:linear-gradient(160deg,#070f1a 0%,#14243a 65%,#3a2c1c 100%);box-shadow:inset 0 -6vh 6vh -3vh rgba(242,146,1,.5),0 1vh 3.5vh rgba(17,46,72,.18)}
   /* regen/onweer: oranje accent op de temperatuurregel */
-  #weather.rain #wxDesc, #weather.storm #wxDesc{color:#ffc164}
-  #weather, #weather *{color:#fff}
+  #weather.rain #wxDesc, #weather.storm #wxDesc, #vxNow.rain #wxDesc, #vxNow.storm #wxDesc{color:#ffc164}
+  #weather, #weather *, #vxNow, #vxNow *{color:#fff}
   #hourly .p{color:#ffd28a!important}
   #radarBox{background:rgba(17,46,72,.06)}
   #rainBars div{background:var(--pf-orange)}
@@ -243,6 +243,112 @@
   .leaflet-control-attribution a{color:rgba(17,46,72,.65)!important}
   .legend{background:rgba(255,255,255,.7);color:var(--text)}
   #dim{background:#0b1a2a}
+
+  /* labels zoals op adsb.lol, in huisstijl */
+  .leaflet-tooltip.plane-label{background:rgba(255,255,255,.9)!important;border:1px solid rgba(17,46,72,.18)!important;border-radius:6px!important;
+    box-shadow:0 1px 4px rgba(17,46,72,.18)!important;padding:2px 6px!important;color:#112E48!important;text-shadow:none!important;
+    font:600 12px Raleway,Inter,sans-serif!important;line-height:1.15!important;white-space:nowrap}
+  .plane-label b{display:block;font-weight:800;font-size:12.5px}
+  .plane-label span{display:block;font-weight:600;color:rgba(17,46,72,.7);font-size:11.5px}
+  .plane-label .bdg{font-style:normal;font-size:9px;font-weight:800;padding:0 4px;border-radius:3px;margin-left:4px;vertical-align:1px;color:#fff}
+  .plane-label .bdg.pol{background:#096AD0} .plane-label .bdg.mil{background:#4b5d23}
+  .plane-label b{display:inline}
+  .plane-label b+span,.plane-label i+span{display:block}
+  #legend{align-items:center;gap:.8vh}
+  #legend .lg-bar{display:inline-block;width:16vh;height:.9vh;border-radius:1vh}
+  #legend span:before{display:none}
+
+  /* ---------- radarmodus ---------- */
+  #menubar .m{cursor:pointer;padding:.2vh .8vh;border-radius:.8vh}
+  #menubar .m.on{background:rgba(17,46,72,.08);color:var(--text);font-weight:700}
+  body.radar .left, body.radar .top{display:none}
+  body.radar .grid{grid-template-columns:1fr;grid-template-rows:1fr;grid-template-areas:"bottom"}
+  body.radar #flSide{flex-basis:30%}
+  #modeBtn{position:absolute;top:1.4vh;left:1.4vh;z-index:600;width:4.4vh;height:4.4vh;border-radius:1.2vh;display:flex;align-items:center;justify-content:center;
+    font-size:calc(1.9vh*var(--fs));cursor:pointer;color:var(--text);background:rgba(255,255,255,.8);border:1px solid rgba(17,46,72,.15);box-shadow:0 1px 4px rgba(17,46,72,.15)}
+  .leaflet-marker-icon, .leaflet-tooltip.plane-label{cursor:pointer}
+  .leaflet-tooltip.plane-label.sel{background:#112E48!important;color:#fff!important;border-color:#112E48!important}
+  .leaflet-tooltip.plane-label.sel span{color:rgba(255,255,255,.8)}
+  /* ---------- detailkaart ---------- */
+  #flDetail{display:none;flex-direction:column;min-height:0;overflow:hidden}
+  #flSide.detail #flDetail{display:flex}
+  #flSide.detail .wt, #flSide.detail #flTable, #flSide.detail #flMsg{display:none}
+  .dt-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1vh}
+  .dt-air{font-size:calc(2.2vh*var(--fs));font-weight:800;color:var(--text);line-height:1.1}
+  .dt-cs{font-size:calc(1.5vh*var(--fs));color:var(--sub);font-weight:600;margin-top:.3vh}
+  .dt-close{font-size:calc(1.5vh*var(--fs));font-weight:700;color:var(--orange);cursor:pointer;white-space:nowrap;padding:.3vh .9vh;border:1px solid rgba(242,146,1,.5);border-radius:1vh}
+  .dt-route{display:flex;align-items:center;gap:1.2vh;margin:1.2vh 0;padding:1.1vh 1.3vh;border-radius:1.4vh;background:rgba(17,46,72,.05)}
+  .dt-route .ap{flex:1;min-width:0}
+  .dt-route .ap b{display:block;font-size:calc(2.4vh*var(--fs));font-weight:800;color:var(--text);line-height:1}
+  .dt-route .ap span{display:block;font-size:calc(1.35vh*var(--fs));color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dt-route .ap span.apn{font-size:calc(1.15vh*var(--fs));color:var(--faint);white-space:normal;line-height:1.2;margin-top:.2vh}
+  .dt-route .ar{font-size:calc(2vh*var(--fs));color:var(--orange)}
+  .dt-photo{width:100%;flex:0 0 auto;height:24vh;object-fit:cover;border-radius:1.2vh;background:rgba(17,46,72,.06);display:none}
+  .dt-credit{font-size:calc(1.05vh*var(--fs));color:var(--faint);margin-top:.3vh;display:none}
+  .dt-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9vh 1.6vh;margin-top:1.1vh}
+  .dt-grid div{min-width:0}
+  .dt-grid span{display:block;font-size:calc(1.2vh*var(--fs));color:var(--sub);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+  .dt-grid b{display:block;font-size:calc(1.7vh*var(--fs));color:var(--text);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* ================= VOLLEDIG-SCHERMWEERGAVEN ================= */
+  .view{display:none;height:calc(100vh - 3.6vh);padding:1.6vh;gap:1.6vh;position:relative}
+  body.v-weer .grid, body.v-news .grid{display:none}
+  body.v-weer #weerView, body.v-news #newsView{display:grid}
+  .vclose{position:absolute;top:2.6vh;right:2.8vh;z-index:5;width:4.4vh;height:4.4vh;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;
+    font-size:calc(1.7vh*var(--fs));font-weight:700;color:var(--text);background:rgba(255,255,255,.85);border:1px solid rgba(17,46,72,.12);box-shadow:0 1px 4px rgba(17,46,72,.15)}
+  #weather, #radarW, #newsW, #vxNow{cursor:pointer}
+
+  /* weer */
+  #weerView{grid-template-columns:29% 1fr 33%;grid-template-rows:1fr 1fr;grid-template-areas:"now hours radar" "now days radar"}
+  #vxNow{grid-area:now;display:flex;flex-direction:column;border:none;color:#fff}
+  #vxNow *{color:#fff}
+  #vxHours{grid-area:hours;display:flex;flex-direction:column}
+  #vxDays{grid-area:days;display:flex;flex-direction:column}
+  #vxRadarW{grid-area:radar;display:flex;flex-direction:column}
+  .vx-city{font-size:calc(2.2vh*var(--fs));font-weight:700}
+  .vx-temp{font-size:calc(10vh*var(--fs));font-weight:300;line-height:1;margin-top:.6vh;letter-spacing:-.02em}
+  .vx-ico{font-size:calc(5vh*var(--fs));line-height:1;margin-top:1vh}
+  .vx-desc{font-size:calc(2.1vh*var(--fs));font-weight:700;margin-top:.6vh}
+  .vx-hl{font-size:calc(1.8vh*var(--fs));opacity:.9;margin-top:.3vh}
+  .vx-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4vh 1.8vh;margin-top:auto;padding-top:1.6vh;border-top:1px solid rgba(255,255,255,.25)}
+  .vx-grid span{display:block;font-size:calc(1.15vh*var(--fs));text-transform:uppercase;letter-spacing:.05em;font-weight:700;opacity:.75}
+  .vx-grid b{display:block;font-size:calc(1.75vh*var(--fs));font-weight:700;white-space:nowrap}
+  #vxChart{flex:1;min-height:0}
+  #vxChart svg{width:100%;height:100%;display:block}
+  #vxDayList{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0}
+  .dy{display:grid;grid-template-columns:9.5vh 3.6vh 7.5vh 4.2vh 1fr 4.2vh;white-space:nowrap;align-items:center;gap:1vh;font-size:calc(1.6vh*var(--fs));font-weight:700;color:var(--text)}
+  .dy .ic{font-size:calc(2vh*var(--fs));text-align:center}
+  .dy .pr{font-size:calc(1.25vh*var(--fs));color:var(--blue);font-weight:700}
+  .dy .lo{color:var(--sub);text-align:right}
+  .dy .bar{height:.8vh;border-radius:1vh;background:rgba(17,46,72,.10);position:relative}
+  .dy .bar i{position:absolute;top:0;bottom:0;border-radius:1vh;background:linear-gradient(90deg,#096AD0,#F29201)}
+  #vxRadarBox{flex:1;min-height:0;border-radius:1.6vh;overflow:hidden;background:rgba(17,46,72,.06)}
+  #vxRadar{width:100%;height:100%;object-fit:contain;display:block}
+  .rainText{font-size:calc(1.8vh*var(--fs));font-weight:700;margin-top:1.2vh}
+  .rainBars{display:flex;align-items:flex-end;gap:.5vh;height:5.5vh;margin-top:.8vh}
+  .rainBars div{flex:1;background:var(--orange);border-radius:.5vh .5vh .15vh .15vh;min-height:3px}
+  .rainAxis{display:flex;justify-content:space-between;font-size:calc(1.3vh*var(--fs));color:var(--faint);margin-top:.4vh}
+
+  /* nieuws */
+  #newsView{grid-template-columns:42% 1fr}
+  #nvListW{display:flex;flex-direction:column}
+  #nvList{list-style:none;margin:0;padding:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(17,46,72,.25) transparent;flex:1;min-height:0}
+  #nvList li{display:flex;gap:1.4vh;padding:1.1vh 1vh;border-radius:1.2vh;cursor:pointer;font-size:calc(1.7vh*var(--fs));font-weight:700;line-height:1.25;color:var(--text)}
+  #nvList li .ago{flex:0 0 7vh;font-size:calc(1.35vh*var(--fs));color:var(--faint);font-weight:600;padding-top:.2vh;white-space:nowrap}
+  #nvList li.on{background:rgba(242,146,1,.14)}
+  #nvList li.on .ago{color:var(--orange)}
+  #nvArtW{display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(17,46,72,.25) transparent}
+  #nvImg{width:100%;height:38vh;object-fit:cover;border-radius:1.6vh;background:rgba(17,46,72,.06);flex:0 0 auto}
+  #nvMeta{font-size:calc(1.4vh*var(--fs));color:var(--orange);font-weight:700;margin-top:1.6vh}
+  #nvTitle{font-size:calc(2.8vh*var(--fs));font-weight:800;line-height:1.15;color:var(--text);margin-top:.6vh}
+  #nvDesc{font-size:calc(1.75vh*var(--fs));line-height:1.5;color:rgba(17,46,72,.82);margin-top:1.2vh;flex:none;padding-bottom:2vh}
+  #nvDesc p{margin:0 0 1vh}
+
+  /* dashboard: alleen de kaart, info pas na aantikken */
+  body:not(.radar) #flSide{display:none}
+  body:not(.radar) #flSide.detail{display:flex;flex-basis:38%}
+  #flDetail{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(17,46,72,.25) transparent}
+  body:not(.radar) .dt-photo{height:13vh}
 </style>
 </head>
 <body>
@@ -251,7 +357,7 @@
 
 <div id="menubar">
   <span class="brand"><i></i>Bureau</span>
-  <span class="m">Weer</span><span class="m">Nieuws</span><span class="m">Vluchten</span>
+  <span class="m" data-mode="dash">Dashboard</span><span class="m" data-mode="weer">Weer</span><span class="m" data-mode="nieuws">Nieuws</span><span class="m" data-mode="radar">Radar</span>
   <span class="grow"></span>
   <span class="st"><i id="sWeather" class="wait"></i>weer <small class="ago" id="tWeather"></small></span>
   <span class="st"><i id="sRadar" class="wait"></i>radar <small class="ago" id="tRadar"></small></span>
@@ -312,17 +418,43 @@
     <div class="w" id="flightW">
       <div id="mapWrap">
         <div id="map"></div>
-        <div class="legend">
-          <span style="--c:#F29201">&lt;1 km</span><span style="--c:#d9480f">1–3</span><span style="--c:#2b8a3e">3–7</span><span style="--c:#096AD0">7–10</span><span style="--c:#112E48">&gt;10 km</span>
-        </div>
+        <div id="modeBtn" title="Radar op volledig scherm">⤢</div>
+        <div class="legend" id="legend"></div>
       </div>
       <div id="flSide">
         <div class="wt" style="margin-bottom:1.2vh">Boven je hoofd <b id="flSrc"></b></div>
         <div id="flTable"></div>
+        <div id="flDetail"></div>
         <div id="flMsg"></div>
       </div>
     </div>
   </div>
+</div>
+<div class="view" id="weerView">
+  <div class="w" id="vxNow"></div>
+  <div class="w" id="vxHours"><div class="wt">Komende 24 uur <b id="vxHoursSub"></b></div><div id="vxChart"></div></div>
+  <div class="w" id="vxDays"><div class="wt">Komende 7 dagen</div><div id="vxDayList"></div></div>
+  <div class="w" id="vxRadarW">
+    <div class="wt">Buienradar <b id="vxRadarTime"></b></div>
+    <div id="vxRadarBox"><img id="vxRadar" alt=""></div>
+    <div id="vxRainText" class="rainText"></div>
+    <div id="vxRainBars" class="rainBars"></div>
+    <div id="vxRainAxis" class="rainAxis"></div>
+  </div>
+  <div class="vclose" data-close title="Terug naar dashboard">✕</div>
+</div>
+<div class="view" id="newsView">
+  <div class="w" id="nvListW">
+    <div class="wt"><span><span class="nos">NOS</span>&nbsp; Nieuws</span><b id="nvUpd"></b></div>
+    <ul id="nvList"></ul>
+  </div>
+  <div class="w" id="nvArtW">
+    <img id="nvImg" alt="">
+    <div id="nvMeta"></div>
+    <div id="nvTitle"></div>
+    <div id="nvDesc"></div>
+  </div>
+  <div class="vclose" data-close title="Terug naar dashboard">✕</div>
 </div>
 <div id="dim"></div>
 
@@ -331,7 +463,7 @@
 /* ===================== INSTELLINGEN ===================== */
 const HOME = { lat: 51.957, lon: 4.212, name: 'Maasdijk' };
 const FLIGHT_RADIUS_NM = 40;          // straal voor vliegtuigen (zeemijl, ~74 km)
-const LABEL_RADIUS_KM = 30;           // callsign-labels binnen deze afstand
+const LABEL_RADIUS_KM = 40;           // callsign-labels binnen deze afstand
 const NIGHT_FROM = 23, NIGHT_TO = 7;  // automatisch dimmen
 const FACT_SECONDS = 50;              // hoe lang een weetje blijft staan
 const NEWS_FEATURE_SECONDS = 15;      // hoe lang een uitgelicht nieuwsbericht blijft staan
@@ -364,7 +496,8 @@ function ago(t) {
   return m < 1 ? 'nu' : m < 60 ? m + ' min' : m < 1440 ? Math.round(m / 60) + ' u' : Math.round(m / 1440) + ' d';
 }
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const stripHTML = s => { const d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); };
+function paragraphs(html) { const d = document.createElement('div'); d.innerHTML = html || ''; const ps = [...d.querySelectorAll('p')].map(p => p.textContent.trim()).filter(Boolean); return ps.length ? ps : [(d.textContent || '').trim()].filter(Boolean); }
+function stripHTML(s) { const d = document.createElement('div'); d.innerHTML = s || ''; return (d.textContent || '').replace(/\s+/g, ' ').trim(); }
 function haversine(a, b, c, d) {
   const R = 6371, k = Math.PI / 180, x = Math.sin((c - a) * k / 2) ** 2 + Math.cos(a * k) * Math.cos(c * k) * Math.sin((d - b) * k / 2) ** 2;
   return 2 * R * Math.asin(Math.sqrt(x));
@@ -412,9 +545,9 @@ const wmo = (c, day = 1) => { const w = WMO[c] || ['–','·','·','clear']; ret
 
 async function loadWeather() {
   const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + HOME.lat + '&longitude=' + HOME.lon +
-    '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,pressure_msl' +
-    '&hourly=temperature_2m,precipitation_probability,weather_code,is_day&minutely_15=precipitation' +
-    '&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min&timezone=Europe%2FAmsterdam&forecast_days=2&wind_speed_unit=kmh';
+    '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,pressure_msl,cloud_cover' +
+    '&hourly=temperature_2m,precipitation_probability,precipitation,weather_code,is_day&minutely_15=precipitation' +
+    '&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max,precipitation_sum,wind_speed_10m_max,uv_index_max&timezone=Europe%2FAmsterdam&forecast_days=7&wind_speed_unit=kmh';
   try {
     const d = await getJSON(url), c = d.current, w = wmo(c.weather_code, c.is_day);
     const box = $('weather');
@@ -451,6 +584,7 @@ async function loadWeather() {
     $('rainText').textContent = !firstWet ? '☂️ Droog de komende 2 uur'
       : wet(slots[0]) ? (firstDry ? '🌧️ Nu nat, droog rond ' + hhmm(new Date(firstDry.t)) : '🌧️ Nat de komende 2 uur')
       : '🌦️ Regen verwacht rond ' + hhmm(new Date(firstWet.t));
+    wxData = d; if (curMode === 'weer') renderWeerView();
     setStatus('Weather', 'ok');
   } catch (e) { console.warn('weer', e); setStatus('Weather', 'err'); $('wxDesc').textContent = 'weer niet bereikbaar'; }
 }
@@ -470,6 +604,7 @@ function loadRadar() {
   };
   const u = RADAR_URLS[radarIdx];
   img.src = u + (u.includes('?') ? '&' : '?') + '_=' + Date.now();
+  loadBigRadar();
 }
 
 /* ===================== NOS NIEUWS ===================== */
@@ -479,7 +614,7 @@ async function fetchRSS(url) {
   try {
     const d = await getJSON('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(url));
     if (d.status !== 'ok' || !d.items || !d.items.length) throw new Error('rss2json: ' + (d.message || 'leeg'));
-    return d.items.map(i => ({ title: i.title, desc: stripHTML(i.description), img: (i.enclosure && i.enclosure.link) || i.thumbnail || '',
+    return d.items.map(i => ({ title: i.title, desc: paragraphs(i.description).join(' '), paras: paragraphs(i.content || i.description), img: (i.enclosure && i.enclosure.link) || i.thumbnail || '',
                                t: new Date((i.pubDate || '').replace(' ', 'T') + 'Z').getTime() }));
   } catch (e) {
     console.warn('rss2json mislukt, probeer allorigins', e);
@@ -487,7 +622,8 @@ async function fetchRSS(url) {
     const doc = new DOMParser().parseFromString(xml, 'text/xml');
     return [...doc.querySelectorAll('item')].map(it => ({
       title: it.querySelector('title')?.textContent || '',
-      desc: stripHTML(it.querySelector('description')?.textContent || ''),
+      desc: paragraphs(it.querySelector('description')?.textContent || '').join(' '),
+      paras: paragraphs(it.querySelector('description')?.textContent || ''),
       img: it.querySelector('enclosure')?.getAttribute('url') || '',
       t: new Date(it.querySelector('pubDate')?.textContent || '').getTime() }));
   }
@@ -500,8 +636,9 @@ async function loadNews() {
 }
 function renderNews() {
   if (!news.length) return;
-  $('newsList').innerHTML = news.slice(0, 10).map(i =>
-    '<li><span class="ago">' + esc(ago(i.t)) + '</span><div><div class="nt">' + esc(i.title) + '</div>' +
+  if (curMode === 'nieuws') renderNewsView();
+  $('newsList').innerHTML = news.slice(0, 25).map((i, n) =>
+    '<li data-i="' + n + '"><span class="ago">' + esc(ago(i.t)) + '</span><div><div class="nt">' + esc(i.title) + '</div>' +
     (i.desc ? '<div class="nd">' + esc(i.desc) + '</div>' : '') + '</div></li>').join('');
   $('newsUpd').textContent = newsLoadedAt ? 'bijgewerkt ' + hhmm(new Date(newsLoadedAt)) : '';
 }
@@ -597,23 +734,41 @@ L.circleMarker([HOME.lat, HOME.lon], { radius: 7, color: '#fff', weight: 2.5, fi
     html: '<div style="font:600 14px Inter,sans-serif;color:#112E48;background:rgba(255,255,255,.85);border:1px solid rgba(17,46,72,.15);padding:1px 5px;border-radius:5px">✈ ' + n + '</div>' }) }).addTo(map));
 // kaart netjes laten passen zodra de layout klaar is
 setTimeout(() => map.invalidateSize(), 300);
+
 window.addEventListener('resize', () => map.invalidateSize());
 
+// hoogtekleur zoals op adsb.lol/tar1090: oranje (laag) → groen → blauw → paars (hoog)
+const ALT_STOPS = [[0, 20], [2000, 20], [10000, 140], [40000, 300]]; // [voet, kleurtoon]
+function altHue(ft) {
+  if (ft <= ALT_STOPS[0][0]) return ALT_STOPS[0][1];
+  for (let i = 1; i < ALT_STOPS.length; i++) if (ft <= ALT_STOPS[i][0]) {
+    const [a0, h0] = ALT_STOPS[i - 1], [a1, h1] = ALT_STOPS[i]; return h0 + (h1 - h0) * (ft - a0) / (a1 - a0);
+  }
+  return ALT_STOPS[ALT_STOPS.length - 1][1];
+}
 function altColor(m, ground) {
   if (ground) return '#8e8e93'; if (m == null) return '#7b8794';
-  return m < 1000 ? '#F29201' : m < 3000 ? '#d9480f' : m < 7000 ? '#2b8a3e' : m < 10000 ? '#096AD0' : '#112E48';
+  return 'hsl(' + Math.round(altHue(m / 0.3048)) + ',85%,45%)';
 }
-function planeIcon(trk, col) {
-  return L.divIcon({ className: '', iconSize: [22, 22], iconAnchor: [11, 11],
-    html: '<svg width="22" height="22" viewBox="0 0 24 24" style="transform:rotate(' + (trk || 0) + 'deg);filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff)">' +
-          '<path fill="' + col + '" d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.3v4.6l2.2 1.7V21L12 20l-3.5 1v-1.2l2.2-1.7v-4.6L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z"/></svg>' });
+const HELI_TYPES = new Set(['EC35','EC45','EC30','EC20','EC55','EC75','EC25','EC135','H160','A109','A119','A139','A169','A189','AS50','AS55','AS65','AS32','AS3B','B06','B407','B412','B429','R22','R44','R66','S76','S92','NH90','H60','H47','MI8','LYNX','EH10']);
+const isHeli = p => p.cat === 'A7' || HELI_TYPES.has(p.type);
+function planeIcon(trk, col, heli, sel) {
+  const shape = heli
+    ? '<path d="M3.5 3.5 L20.5 16.5 M20.5 3.5 L3.5 16.5" stroke="' + col + '" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<path fill="' + col + '" d="M12 6.2c1.9 0 3.2 1.7 3.2 3.8s-1.3 3.8-3.2 3.8-3.2-1.7-3.2-3.8 1.3-3.8 3.2-3.8zM11.2 13.5h1.6v6.3h-1.6zM9.2 19.2h5.6v1.4H9.2z"/>'
+    : '<path fill="' + col + '" d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.3v4.6l2.2 1.7V21L12 20l-3.5 1v-1.2l2.2-1.7v-4.6L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z"/>';
+  const sz = sel ? 38 : 26;
+  return L.divIcon({ className: '', iconSize: [sz, sz], iconAnchor: [sz / 2, sz / 2],
+    html: (sel ? '<div style="position:absolute;inset:-4px;border-radius:50%;border:2.5px solid #F29201;background:rgba(242,146,1,.15)"></div>' : '') +
+          '<svg width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" style="position:relative;transform:rotate(' + (trk || 0) + 'deg);filter:drop-shadow(0 0 1px #fff) drop-shadow(0 0 1.5px rgba(17,46,72,.55))">' + shape + '</svg>' });
 }
 function normReadsb(a) {
   const ground = a.alt_baro === 'ground';
   const ft = ground ? 0 : (typeof a.alt_baro === 'number' ? a.alt_baro : (typeof a.alt_geom === 'number' ? a.alt_geom : null));
-  return { id: a.hex, cs: (a.flight || '').trim() || a.r || a.hex, type: a.t || '', lat: a.lat ?? a.lastPosition?.lat, lon: a.lon ?? a.lastPosition?.lon,
+  return { id: a.hex, cs: (a.flight || '').trim() || a.r || a.hex, type: a.t || '', reg: a.r || '', cat: a.category || '', mil: !!((a.dbFlags || 0) & 1),
+           lat: a.lat ?? a.lastPosition?.lat, lon: a.lon ?? a.lastPosition?.lon,
            altM: ft == null ? null : ft * 0.3048, ground, spd: a.gs != null ? a.gs * 1.852 : null,
-           trk: a.track ?? a.true_heading ?? a.mag_heading ?? null, vr: a.baro_rate ?? a.geom_rate ?? null };
+           trk: a.track ?? a.true_heading ?? a.mag_heading ?? null, vr: a.baro_rate ?? a.geom_rate ?? null, sq: a.squawk || '' };
 }
 function readsbList(d) {
   const arr = d.ac || d.aircraft;
@@ -677,7 +832,7 @@ async function loadFlights() {
   }
   if (list) {
     updatePlanes(list);
-    $('flSrc').textContent = 'via ' + route.src.name + (route.proxy.name !== 'direct' ? ' · ' + route.proxy.name : '');
+    $('flSrc').textContent = 'via ' + route.src.name;
     $('flMsg').textContent = ''; setStatus('Flights', 'ok');
   } else {
     failCount++;
@@ -694,71 +849,78 @@ async function loadFlights() {
   flightTimer = setTimeout(loadFlights, every);
 }
 
-/* ---------- herkomst / bestemming / type opzoeken (adsbdb, reserve: hexdb) ---------- */
-const INFO_TTL = 12 * 3600e3;
-const info = (() => { try { return JSON.parse(localStorage.getItem('flInfo') || '{}'); } catch { return {}; } })();
-function saveInfo() {
-  try { const now = Date.now(); for (const k in info) if (now - info[k].t > INFO_TTL) delete info[k];
-        localStorage.setItem('flInfo', JSON.stringify(info)); } catch {}
+/* ---------- routes via adsb.lol (zelfde bron als hun kaart) ---------- */
+const ROUTE_TTL = 6 * 3600e3, ROUTE_MISS_TTL = 3600e3;
+const routes = (() => { try { return JSON.parse(localStorage.getItem('flRoutes2') || '{}'); } catch { return {}; } })();
+function saveRoutes() {
+  try { const now = Date.now(); for (const k in routes) if (now - routes[k].t > (routes[k].r ? ROUTE_TTL : ROUTE_MISS_TTL)) delete routes[k];
+        localStorage.setItem('flRoutes2', JSON.stringify(routes)); } catch {}
 }
-let infoProxyIdx = 0;
-// haalt een URL op, eerst direct en anders via de proxy's; een echte 404 ("onbekend") is een antwoord, geen fout van de proxy
-async function viaProxy(url) {
-  let lastErr;
-  for (let n = 0; n < PROXIES.length; n++) {
-    const i = (infoProxyIdx + n) % PROXIES.length;
-    try { const d = await getJSON(PROXIES[i].wrap(url), 8000); infoProxyIdx = i; return d; }
-    catch (e) { if (/^HTTP 404/.test(e.message || '')) { infoProxyIdx = i; throw e; } lastErr = e; }
-  }
-  throw lastErr;
+const pendingRoutes = new Set();
+const isAirlineCs = cs => /^[A-Z]{3}\d[A-Z0-9]{0,4}$/.test(cs || '');
+async function postJSON(url, body, ms = 9000) {
+  const [signal, done] = withTimeout(ms);
+  try { const r = await fetch(url, { method: 'POST', signal, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        if (!r.ok) throw new Error('HTTP ' + r.status); return await r.json(); }
+  finally { done(); }
 }
-const place = a => a ? { code: a.iata_code || a.icao_code || '', city: a.municipality || a.name || '' } : null;
-async function fetchInfo(p) {
-  const out = {};
-  const cs = /^[A-Z0-9]{3,8}$/.test(p.cs) && p.cs !== p.id.toUpperCase() ? p.cs : '';
+// routes per callsign via adsbdb (reserve: hexdb), één voor één en rustig
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const viaProxyJSON = u => getJSON(MY_PROXY ? MY_PROXY + encodeURIComponent(u) : u, 8000);
+const apInfo = a => a ? { code: a.iata_code || a.icao_code || '', icao: a.icao_code || '', city: a.municipality || '', name: a.name || '', country: a.country_name || '' } : null;
+const hexdbAirports = {};
+async function hexdbAirport(icao) {
+  if (hexdbAirports[icao]) return hexdbAirports[icao];
+  let r = { code: icao, icao, city: '', name: '', country: '' };
+  try { const d = await viaProxyJSON('https://hexdb.io/api/v1/airport/icao/' + icao); r = { code: d.iata || icao, icao, city: d.region_name || '', name: d.airport || '', country: d.country_code || '' }; } catch {}
+  return (hexdbAirports[icao] = r);
+}
+async function lookupRoute(cs) {
   try {
-    const d = await viaProxy('https://api.adsbdb.com/v0/aircraft/' + p.id + (cs ? '?callsign=' + cs : ''));
-    const r = d.response || {};
-    if (r.aircraft) { out.type = r.aircraft.icao_type || r.aircraft.type; out.reg = r.aircraft.registration; out.owner = r.aircraft.registered_owner; }
-    if (r.flightroute) { out.from = place(r.flightroute.origin); out.to = place(r.flightroute.destination); out.airline = r.flightroute.airline && r.flightroute.airline.name; }
+    const d = await viaProxyJSON('https://api.adsbdb.com/v0/callsign/' + cs);
+    const fr = d.response && d.response.flightroute;
+    if (fr && fr.origin && fr.destination) return { from: apInfo(fr.origin), to: apInfo(fr.destination), sure: true,
+      airline: (fr.airline && fr.airline.icao) || '', airlineName: (fr.airline && fr.airline.name) || '' };
+  } catch (e) { if (!/^HTTP 404/.test(e.message || '')) throw e; }
+  try {
+    const d = await viaProxyJSON('https://hexdb.io/api/v1/route/icao/' + cs);
+    const parts = (d.route || '').split('-').filter(Boolean);
+    if (parts.length >= 2) return { from: await hexdbAirport(parts[0]), to: await hexdbAirport(parts[parts.length - 1]), sure: true, airline: cs.slice(0, 3), airlineName: '' };
   } catch {}
-  if (!out.from && cs) {
-    try { const d = await viaProxy('https://api.adsbdb.com/v0/callsign/' + cs); const fr = d.response && d.response.flightroute;
-          if (fr) { out.from = place(fr.origin); out.to = place(fr.destination); out.airline = fr.airline && fr.airline.name; } } catch {}
-  }
-  if (!out.from && cs) {
-    try { const d = await viaProxy('https://hexdb.io/api/v1/route/icao/' + cs);
-          const parts = (d.route || '').split('-'); if (parts.length >= 2) { out.from = { code: parts[0], city: '' }; out.to = { code: parts[parts.length - 1], city: '' }; } } catch {}
-  }
-  if (!out.type) {
-    try { const d = await viaProxy('https://hexdb.io/api/v1/aircraft/' + p.id); out.type = d.ICAOTypeCode; out.reg = out.reg || d.Registration; out.owner = out.owner || d.RegisteredOwners; } catch {}
-  }
-  return out;
+  return null;
 }
-const infoQueue = [], queued = new Set();
-let infoBusy = false;
-function wantInfo(p) {
-  const k = p.id + '|' + p.cs;
-  if (info[k] || queued.has(k)) return;
-  queued.add(k); infoQueue.push(p); pumpInfo();
-}
-async function pumpInfo() {
-  if (infoBusy) return; infoBusy = true;
-  while (infoQueue.length) {
-    const p = infoQueue.shift(), k = p.id + '|' + p.cs;
-    try { info[k] = { t: Date.now(), d: await fetchInfo(p) }; saveInfo(); } catch {}
-    queued.delete(k);
-    renderSide(); refreshLabel(p.id);
-    await new Promise(r => setTimeout(r, 350)); // rustig aan richting de gratis databases
+const routeQ = []; let routeRunning = false;
+function fetchRoutes(list) {
+  const now = Date.now();
+  for (const p of list) {
+    if (routeQ.length >= 30) break;
+    if (p.ground || !isAirlineCs(p.cs) || pendingRoutes.has(p.cs)) continue;
+    const c = routes[p.cs]; if (c && now - c.t < (c.r ? ROUTE_TTL : ROUTE_MISS_TTL)) continue;
+    pendingRoutes.add(p.cs); routeQ.push(p.cs);
   }
-  infoBusy = false;
+  runRouteQ();
 }
-const infoOf = p => (info[p.id + '|' + p.cs] || {}).d || null;
-function labelText(p) {
-  const i = infoOf(p);
-  return p.cs + (i && i.from && i.to ? '  ' + i.from.code + '→' + i.to.code : '');
+async function runRouteQ() {
+  if (routeRunning) return; routeRunning = true;
+  while (routeQ.length) {
+    const cs = routeQ.shift();
+    try { routes[cs] = { t: Date.now(), r: await lookupRoute(cs) }; saveRoutes(); }
+    catch (e) { console.warn('route', cs, e); }
+    pendingRoutes.delete(cs);
+    for (const e of planes.values()) if (e.p.cs === cs) refreshLabel(e);
+    renderSide();
+    await sleep(300);
+  }
+  routeRunning = false;
 }
-function refreshLabel(id) { const e = planes.get(id); if (e && e.marker.getTooltip()) e.marker.setTooltipContent(labelText(e.p)); }
+const routeOf = p => (routes[p.cs] || {}).r || null;
+const isPolice = p => /^ZXP/.test(p.cs) || /^PH-?PX/.test(p.reg || '');
+function labelHTML(p) {
+  const r = routeOf(p);
+  const badge = isPolice(p) ? '<i class="bdg pol">POLITIE</i>' : p.mil ? '<i class="bdg mil">MIL</i>' : '';
+  return '<b>' + esc(p.cs) + '</b>' + badge + (r ? '<span>' + (r.sure ? '' : '? ') + esc(r.from.code) + ' – ' + esc(r.to.code) + '</span>' : '');
+}
+function refreshLabel(e) { if (e && e.marker.getTooltip()) e.marker.setTooltipContent(labelHTML(e.p)); }
 
 function updatePlanes(list) {
   const now = Date.now(), seen = new Set();
@@ -766,23 +928,138 @@ function updatePlanes(list) {
   for (const p of list) {
     seen.add(p.id);
     p.dist = haversine(HOME.lat, HOME.lon, p.lat, p.lon);
-    const col = altColor(p.altM, p.ground);
+    const col = altColor(p.altM, p.ground), heli = isHeli(p);
     let e = planes.get(p.id);
-    if (!e) { e = { marker: L.marker([p.lat, p.lon], { icon: planeIcon(p.trk, col), interactive: false }).addTo(map) }; planes.set(p.id, e); }
-    else { e.marker.setLatLng([p.lat, p.lon]); if (e.col !== col || Math.abs((e.p.trk || 0) - (p.trk || 0)) > 2) e.marker.setIcon(planeIcon(p.trk, col)); }
-    Object.assign(e, { p, t: now, col, base: [p.lat, p.lon] });
-    if (p.dist <= LABEL_RADIUS_KM && !p.ground) {
-      wantInfo(p);
-      if (!e.marker.getTooltip()) e.marker.bindTooltip(labelText(p), { permanent: true, direction: 'right', offset: [10, 0], className: 'plane-label' });
-      else e.marker.setTooltipContent(labelText(p));
+    const sel = p.id === selectedId;
+    if (!e) { const id = p.id; e = { marker: L.marker([p.lat, p.lon], { icon: planeIcon(p.trk, col, heli, sel), interactive: true, zIndexOffset: sel ? 1000 : 0 }).addTo(map) };
+              e.marker.on('click', () => selectPlane(id)); planes.set(p.id, e); }
+    else { e.marker.setLatLng([p.lat, p.lon]); if (e.col !== col || e.heli !== heli || e.sel !== sel || Math.abs((e.p.trk || 0) - (p.trk || 0)) > 2) { e.marker.setIcon(planeIcon(p.trk, col, heli, sel)); e.marker.setZIndexOffset(sel ? 1000 : 0); } }
+    Object.assign(e, { p, t: now, col, heli, sel, base: [p.lat, p.lon] });
+    const radar = document.body.classList.contains('radar');
+    const showLabel = sel || (!p.ground && (radar || p.dist <= LABEL_RADIUS_KM || isPolice(p)));
+    if (showLabel) {
+      if (!e.marker.getTooltip()) e.marker.bindTooltip(labelHTML(p), { permanent: true, direction: 'right', offset: [12, 0], className: 'plane-label', interactive: true });
+      else e.marker.setTooltipContent(labelHTML(p));
+      hookLabel(e, p.id, sel);
     } else if (e.marker.getTooltip()) e.marker.unbindTooltip();
   }
   for (const [id, e] of planes) if (!seen.has(id)) { map.removeLayer(e.marker); planes.delete(id); }
-
+  lastList = list;
+  if (selectedId && !seen.has(selectedId)) { clearTrail(); selectedId = null; $('flSide').classList.remove('detail'); }
+  growTrail();
   lastAir = list.filter(p => !p.ground);
   renderSide();
+  fetchRoutes(lastAir.slice().sort((a, b) => a.dist - b.dist));
 }
-let lastAir = [];
+let lastAir = [], lastList = [], selectedId = null;
+function hookLabel(e, id, sel) {
+  const el = e.marker.getTooltip() && e.marker.getTooltip().getElement();
+  if (el) { el.onclick = ev => { ev.stopPropagation(); selectPlane(id); }; el.classList.toggle('sel', !!sel); }
+}
+function selectPlane(id) {
+  if (selectedId !== id) showTrail(id);
+  selectedId = id;
+  $('flSide').classList.add('detail');
+  setTimeout(() => map.invalidateSize(), 30);
+  updatePlanes(lastList);
+  renderDetail(true);
+}
+function closeDetail() { clearTrail(); selectedId = null; $('flSide').classList.remove('detail'); setTimeout(() => map.invalidateSize(), 30); updatePlanes(lastList); }
+window.__flRefresh = () => { map.invalidateSize(); updatePlanes(lastList); };
+window.__flSelect = selectPlane;
+window.__flReset = () => { if (selectedId) closeDetail(); else clearTrail(); map.setView([HOME.lat, HOME.lon], 9, { animate: true }); };
+
+/* ---------- spoor (trail) via adsb.lol ---------- */
+let trailLayer = null, trailFor = null, trailLast = null;
+function clearTrail() { if (trailLayer) map.removeLayer(trailLayer); trailLayer = null; trailFor = null; trailLast = null; }
+function trailSeg(a, b, altFt) {
+  const ground = altFt === 'ground';
+  L.polyline([a, b], { color: altColor(ground ? 0 : altFt * 0.3048, ground), weight: 3.5, opacity: .9, lineCap: 'round', interactive: false }).addTo(trailLayer);
+}
+async function showTrail(hex) {
+  clearTrail();
+  trailFor = hex;
+  trailLayer = L.layerGroup().addTo(map);
+  const h = String(hex).toLowerCase(), base = 'https://adsb.lol/data/traces/' + h.slice(-2) + '/';
+  const get = f => { const u = base + f + h + '.json'; return getJSON(MY_PROXY ? MY_PROXY + encodeURIComponent(u) : u, 9000).catch(() => null); };
+  const [full, rec] = await Promise.all([get('trace_full_'), get('trace_recent_')]);
+  if (trailFor !== hex || !trailLayer) return;
+  let pts = [];
+  const push = (tr, minT) => { if (!tr || !Array.isArray(tr.trace)) return; for (const q of tr.trace) { const t = tr.timestamp + q[0]; if (t > minT && typeof q[1] === 'number') pts.push({ t, lat: q[1], lon: q[2], alt: q[3], f: q[6] || 0 }); } };
+  push(full, 0);
+  push(rec, pts.length ? pts[pts.length - 1].t : 0);
+  if (!pts.length) return;
+  // alleen de huidige vlucht: terug tot de start (grond, nieuwe 'leg' of een gat van >20 min)
+  let s0 = 0;
+  for (let i = pts.length - 1; i > 0; i--) { if (pts[i - 1].alt === 'ground' || (pts[i].f & 2) || pts[i].t - pts[i - 1].t > 1200) { s0 = i - (pts[i - 1].alt === 'ground' ? 1 : 0); break; } }
+  pts = pts.slice(Math.max(0, s0));
+  const step = Math.max(1, Math.ceil(pts.length / 600)); // max ~600 lijnstukjes
+  let prev = pts[0];
+  for (let i = step; i < pts.length; i += step) { trailSeg([prev.lat, prev.lon], [pts[i].lat, pts[i].lon], pts[i].alt); prev = pts[i]; }
+  const last = pts[pts.length - 1];
+  if (prev !== last) trailSeg([prev.lat, prev.lon], [last.lat, last.lon], last.alt);
+  trailLast = [last.lat, last.lon];
+  growTrail();
+}
+// laat het spoor live meegroeien met nieuwe posities
+function growTrail() {
+  if (!trailLayer || !trailLast || !selectedId) return;
+  const e = planes.get(selectedId); if (!e) return;
+  const p = e.p, cur = [p.lat, p.lon];
+  if (Math.abs(cur[0] - trailLast[0]) + Math.abs(cur[1] - trailLast[1]) < 1e-5) return;
+  trailSeg(trailLast, cur, p.ground ? 'ground' : (p.altM == null ? 0 : p.altM / 0.3048));
+  trailLast = cur;
+}
+
+/* ---------- foto's via planespotters.net ---------- */
+const photos = {};
+async function loadPhoto(hex) {
+  if (photos[hex] !== undefined) return photos[hex];
+  photos[hex] = null;
+  try {
+    const u = 'https://api.planespotters.net/pub/photos/hex/' + hex;
+    const d = await getJSON(MY_PROXY ? MY_PROXY + encodeURIComponent(u) : u, 8000);
+    const ph = (d.photos || [])[0];
+    if (ph) photos[hex] = { src: (ph.thumbnail_large || ph.thumbnail || {}).src, by: ph.photographer || '', link: ph.link || '' };
+  } catch (e) { console.warn('foto', e); }
+  return photos[hex];
+}
+function fmtNum(n) { return Math.round(n).toLocaleString('nl-NL'); }
+function renderDetail(fresh) {
+  const e = planes.get(selectedId); if (!e) return;
+  const p = e.p, r = routeOf(p);
+  const vr = p.vr == null ? '–' : Math.abs(p.vr) < 200 ? 'vlak' : (p.vr > 0 ? '↗ stijgt ' : '↘ daalt ') + fmtNum(Math.abs(p.vr) * 0.00508) + ' m/s';
+  const alt = p.ground ? 'op de grond' : p.altM == null ? '–' : fmtNum(p.altM) + ' m · ' + fmtNum(p.altM / 0.3048) + ' ft';
+  const routeBox = r
+    ? '<div class="dt-route"><div class="ap"><b>' + esc(r.from.code) + '</b><span>' + esc(r.from.city || r.from.country || '') + '</span><span class="apn">' + esc(r.from.name || '') + '</span></div><div class="ar">✈</div>' +
+      '<div class="ap" style="text-align:right"><b>' + esc(r.to.code) + '</b><span>' + esc(r.to.city || r.to.country || '') + '</span><span class="apn">' + esc(r.to.name || '') + '</span></div></div>' +
+      (r.sure ? '' : '<div class="dt-credit" style="display:block;margin-top:-.6vh">route onzeker</div>')
+    : '<div class="dt-route"><div class="ap"><span>' + (pendingRoutes.has(p.cs) ? 'route opzoeken…' : isHeli(p) ? 'helikopter, geen vaste route' : 'route onbekend') + '</span></div></div>';
+  $('flDetail').innerHTML =
+    '<div class="dt-top"><div><div class="dt-air">' + esc(airlineOf(p)) + '</div><div class="dt-cs">' + esc(p.cs) +
+      (isPolice(p) ? ' · <span style="color:#096AD0">politie</span>' : p.mil ? ' · militair' : '') + '</div></div>' +
+      '<div class="dt-close" id="dtClose">✕ sluiten</div></div>' +
+    routeBox +
+    '<img class="dt-photo" id="dtPhoto" alt=""><div class="dt-credit" id="dtCredit"></div>' +
+    '<div class="dt-grid">' +
+      '<div><span>Type</span><b>' + esc(p.type || '–') + (isHeli(p) ? ' (heli)' : '') + '</b></div>' +
+      '<div><span>Registratie</span><b>' + esc(p.reg || '–') + '</b></div>' +
+      '<div><span>Hoogte</span><b>' + alt + '</b></div>' +
+      '<div><span>Snelheid</span><b>' + (p.spd == null ? '–' : fmtNum(p.spd) + ' km/u') + '</b></div>' +
+      '<div><span>Stijgen / dalen</span><b>' + vr + '</b></div>' +
+      '<div><span>Koers</span><b>' + (p.trk == null ? '–' : Math.round(p.trk) + '° ' + compass(p.trk)) + '</b></div>' +
+      '<div><span>Afstand tot jou</span><b>' + p.dist.toFixed(1).replace('.', ',') + ' km ' + compass(bearing(HOME.lat, HOME.lon, p.lat, p.lon)) + '</b></div>' +
+      '<div><span>Squawk</span><b>' + esc(p.sq || '–') + (['7500','7600','7700'].includes(p.sq) ? ' ⚠️' : '') + '</b></div>' +
+    '</div>';
+  $('dtClose').onclick = closeDetail;
+  const show = ph => {
+    if (!ph || !ph.src || selectedId !== p.id) return;
+    const img = $('dtPhoto'); if (!img) return;
+    img.src = ph.src; img.style.display = 'block';
+    $('dtCredit').textContent = '© ' + ph.by + ' · planespotters.net'; $('dtCredit').style.display = 'block';
+  };
+  if (photos[p.id]) show(photos[p.id]); else if (fresh) loadPhoto(p.id).then(show);
+}
 const AIRLINES = {
   KLM:'KLM', KLC:'KLM Cityhopper', TRA:'Transavia', TVF:'Transavia France', MPH:'Martinair', CND:'Corendon', CAI:'Corendon', TFL:'TUI', TOM:'TUI', JAF:'TUI',
   EZY:'easyJet', EJU:'easyJet', EZS:'easyJet', RYR:'Ryanair', RUK:'Ryanair', MAY:'Ryanair', LDM:'Lauda', WZZ:'Wizz Air', WMT:'Wizz Air', WUK:'Wizz Air',
@@ -795,27 +1072,30 @@ const AIRLINES = {
   BCS:'DHL', DHK:'DHL', BOX:'AeroLogic', FDX:'FedEx', UPS:'UPS', CLX:'Cargolux', ABR:'ASL Airlines', GEC:'Lufthansa Cargo', CKS:'Kalitta Air',
   NJE:'NetJets', VJT:'VistaJet', RCH:'US Air Force', NATO:'NAVO'
 };
-function airlineOf(p, i) {
-  if (i && i.airline) return i.airline;
+function airlineOf(p) {
+  if (isPolice(p)) return 'Politie';
+  const r = routeOf(p);
+  if (r && r.airline && AIRLINES[r.airline]) return AIRLINES[r.airline];
+  if (r && r.airlineName) return r.airlineName;
   const m = /^([A-Z]{3})\d/.exec(p.cs);
   if (m && AIRLINES[m[1]]) return AIRLINES[m[1]];
-  if (/^PH[A-Z]{3}$/.test(p.cs)) return 'Nederlands privétoestel';
-  if (i && i.owner) return i.owner;
-  return m ? m[1] : 'Onbekend';
+  if (p.mil) return 'Militair';
+  if (/^PH/.test(p.reg || p.cs)) return isHeli(p) ? 'Helikopter' : 'Privétoestel';
+  return isHeli(p) ? 'Helikopter' : (m ? m[1] : 'Onbekend');
 }
 function renderSide() {
-  const air = lastAir.slice();
-  const near = air.sort((a, b) => a.dist - b.dist).slice(0, 6);
-  near.forEach(wantInfo);
+  if (selectedId) renderDetail(false);
+  const near = lastAir.slice().sort((a, b) => a.dist - b.dist).slice(0, 6);
   $('flTable').innerHTML = near.map(p => {
-    const i = infoOf(p) || {};
-    let route;
-    if (i.from && i.to) route = '<b>' + esc(i.from.city || i.from.code) + '</b> → <b>' + esc(i.to.city || i.to.code) + '</b>';
-    else route = queued.has(p.id + '|' + p.cs) ? 'route opzoeken…' : 'route onbekend';
+    const r = routeOf(p);
+    let line2;
+    if (r) line2 = '<b>' + esc(r.from.code) + '</b> ' + esc(r.from.city || r.from.name) + ' → <b>' + esc(r.to.code) + '</b> ' + esc(r.to.city || r.to.name);
+    else if (pendingRoutes.has(p.cs)) line2 = 'route opzoeken…';
+    else line2 = esc([isHeli(p) ? 'helikopter' : '', p.type, p.reg].filter(Boolean).join(' · ') || 'route onbekend');
     return '<div class="fl">' +
-      '<div class="a"><span><span style="color:' + altColor(p.altM) + '">●</span> <span class="cs">' + esc(airlineOf(p, i)) + '</span></span>' +
+      '<div class="a"><span><span style="color:' + altColor(p.altM) + '">' + (isHeli(p) ? '◆' : '●') + '</span> <span class="cs">' + esc(airlineOf(p)) + '</span></span>' +
       '<span class="r">' + esc(p.cs) + '</span></div>' +
-      '<div class="b"><span class="route">' + route + '</span></div>' +
+      '<div class="b"><span class="route">' + line2 + '</span></div>' +
       '</div>';
   }).join('') || '<div class="fl" style="color:var(--sub)">Niets in de buurt</div>';
 }
@@ -828,8 +1108,137 @@ setInterval(() => {
     e.marker.setLatLng([e.base[0] + dist * Math.cos(r) / 111320, e.base[1] + dist * Math.sin(r) / (111320 * Math.cos(e.base[0] * Math.PI / 180))]);
   }
 }, 1000);
+$('legend').innerHTML = '<span>hoogte</span><span class="lg-bar" style="background:linear-gradient(90deg,' +
+  [0, 1000, 2000, 4000, 6000, 8000, 10000, 15000, 20000, 25000, 30000, 35000, 40000].map(f => 'hsl(' + Math.round(altHue(f)) + ',85%,45%)').join(',') +
+  ')"></span><span>12 km</span>';
 loadFlights();
 }
+
+/* ===================== WEERGAVEN ===================== */
+let wxData = null, curMode = 'dash', nvIdx = 0;
+const IDLE_MINUTES = 3; // na zoveel minuten niet aanraken terug naar de startweergave
+
+function loadBigRadar() {
+  const img = $('vxRadar'); if (!img) return;
+  img.onload = () => { $('vxRadarTime').textContent = 'bijgewerkt ' + hhmm(new Date()); };
+  img.onerror = () => { img.onerror = null; img.src = 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=600&h=640&_=' + Date.now(); };
+  img.src = 'https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?height=640&width=600&renderBackground=True&renderBranding=False&renderText=True&_=' + Date.now();
+}
+
+function renderWeerView() {
+  const d = wxData; if (!d) return;
+  const c = d.current, w = wmo(c.weather_code, c.is_day);
+  $('vxNow').className = 'w' + (w.kind !== 'clear' ? ' ' + w.kind : '') + (c.is_day ? '' : ' night');
+  const sr = new Date(d.daily.sunrise[0]), ss = new Date(d.daily.sunset[0]), len = (ss - sr) / 60000;
+  $('vxNow').innerHTML =
+    '<div class="vx-city">Maasdijk ➤</div>' +
+    '<div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="vx-temp">' + Math.round(c.temperature_2m) + '°</div><div class="vx-ico">' + w.ico + '</div></div>' +
+    '<div class="vx-desc">' + w.txt + '</div>' +
+    '<div class="vx-hl">H:' + Math.round(d.daily.temperature_2m_max[0]) + '°  L:' + Math.round(d.daily.temperature_2m_min[0]) + '°  ·  voelt als ' + Math.round(c.apparent_temperature) + '°</div>' +
+    '<div class="vx-grid">' +
+      '<div><span>Wind</span><b>' + compass(c.wind_direction_10m) + ' ' + beaufort(c.wind_speed_10m) + ' Bft · ' + Math.round(c.wind_speed_10m) + ' km/u</b></div>' +
+      '<div><span>Windstoten</span><b>' + Math.round(c.wind_gusts_10m) + ' km/u</b></div>' +
+      '<div><span>Luchtvochtigheid</span><b>' + c.relative_humidity_2m + '%</b></div>' +
+      '<div><span>Luchtdruk</span><b>' + Math.round(c.pressure_msl) + ' hPa</b></div>' +
+      '<div><span>Bewolking</span><b>' + (c.cloud_cover ?? '–') + '%</b></div>' +
+      '<div><span>UV-index</span><b>' + (d.daily.uv_index_max ? Math.round(d.daily.uv_index_max[0]) : '–') + '</b></div>' +
+      '<div><span>Zon op / onder</span><b>' + hhmm(sr) + ' – ' + hhmm(ss) + '</b></div>' +
+      '<div><span>Daglicht</span><b>' + Math.floor(len / 60) + 'u ' + pad(Math.round(len % 60)) + 'm</b></div>' +
+    '</div>';
+
+  // 24-uursgrafiek
+  const now = Date.now(), ht = d.hourly.time.map(t => new Date(t).getTime());
+  let h0 = ht.findIndex(t => t > now - 3600e3); if (h0 < 0) h0 = 0;
+  const N = 24, T = [], P = [], PP = [], C = [], D = [], H = [];
+  for (let i = h0; i < h0 + N && i < ht.length; i++) { T.push(d.hourly.temperature_2m[i]); P.push(d.hourly.precipitation[i] || 0); PP.push(d.hourly.precipitation_probability[i] || 0); C.push(d.hourly.weather_code[i]); D.push(d.hourly.is_day[i]); H.push(new Date(ht[i]).getHours()); }
+  const W = 640, Hh = 330, x0 = 24, x1 = W - 24, yTop = 100, yBot = 215, yBase = 288;
+  const tmin = Math.min(...T), tmax = Math.max(...T), span = Math.max(3, tmax - tmin);
+  const X = i => x0 + i * (x1 - x0) / (T.length - 1), Y = t => yBot - (t - tmin) / span * (yBot - yTop);
+  const pts = T.map((t, i) => X(i).toFixed(1) + ',' + Y(t).toFixed(1));
+  const maxP = Math.max(1, ...P);
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + Hh + '" preserveAspectRatio="xMidYMid meet" font-family="Raleway,Inter,sans-serif">' +
+    '<defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F29201" stop-opacity=".35"/><stop offset="1" stop-color="#F29201" stop-opacity="0"/></linearGradient></defs>';
+  svg += '<polygon fill="url(#tg)" points="' + X(0) + ',' + yBase + ' ' + pts.join(' ') + ' ' + X(T.length - 1) + ',' + yBase + '"/>';
+  P.forEach((p, i) => { if (p > 0) { const h = Math.max(3, p / maxP * 46); svg += '<rect x="' + (X(i) - 7) + '" y="' + (yBase - h) + '" width="14" height="' + h + '" rx="3" fill="#096AD0" opacity=".75"/>'; } });
+  svg += '<polyline fill="none" stroke="#F29201" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="' + pts.join(' ') + '"/>';
+  for (let i = 0; i < T.length; i += 3) {
+    svg += '<text x="' + X(i) + '" y="' + (Y(T[i]) - 13) + '" text-anchor="middle" font-size="19" font-weight="800" fill="#112E48">' + Math.round(T[i]) + '°</text>';
+    svg += '<text x="' + X(i) + '" y="36" text-anchor="middle" font-size="25">' + wmo(C[i], D[i]).ico + '</text>';
+    if (PP[i] >= 20) svg += '<text x="' + X(i) + '" y="60" text-anchor="middle" font-size="14" font-weight="700" fill="#096AD0">' + PP[i] + '%</text>';
+    svg += '<text x="' + X(i) + '" y="' + (yBase + 28) + '" text-anchor="middle" font-size="15" font-weight="700" fill="rgba(17,46,72,.55)">' + (i === 0 ? 'nu' : pad(H[i]) + 'u') + '</text>';
+    svg += '<circle cx="' + X(i) + '" cy="' + Y(T[i]) + '" r="4.5" fill="#fff" stroke="#F29201" stroke-width="2.5"/>';
+  }
+  svg += '<line x1="' + x0 + '" x2="' + x1 + '" y1="' + yBase + '" y2="' + yBase + '" stroke="rgba(17,46,72,.15)"/></svg>';
+  $('vxChart').innerHTML = svg;
+  const totP = P.reduce((a, b) => a + b, 0);
+  $('vxHoursSub').textContent = totP >= 0.1 ? totP.toFixed(1).replace('.', ',') + ' mm regen' : 'droog';
+
+  // 7 dagen
+  const dd = d.daily, lo = Math.min(...dd.temperature_2m_min), hi = Math.max(...dd.temperature_2m_max), rng = Math.max(1, hi - lo);
+  $('vxDayList').innerHTML = dd.time.map((t, i) => {
+    const day = i === 0 ? 'Vandaag' : new Date(t + 'T12:00').toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric' });
+    const mn = dd.temperature_2m_min[i], mx = dd.temperature_2m_max[i], pr = dd.precipitation_probability_max ? dd.precipitation_probability_max[i] : 0;
+    return '<div class="dy"><span>' + day + '</span><span class="ic">' + wmo(dd.weather_code[i], 1).ico + '</span><span class="pr">' + (pr >= 20 ? '💧' + pr + '%' : '') + '</span>' +
+      '<span class="lo">' + Math.round(mn) + '°</span><span class="bar"><i style="left:' + ((mn - lo) / rng * 100) + '%;width:' + Math.max(4, (mx - mn) / rng * 100) + '%"></i></span><span>' + Math.round(mx) + '°</span></div>';
+  }).join('');
+
+  // regen 2 uur (zelfde als het kleine blok)
+  $('vxRainText').textContent = $('rainText').textContent;
+  $('vxRainBars').innerHTML = $('rainBars').innerHTML;
+  $('vxRainAxis').innerHTML = $('rainAxis').innerHTML;
+}
+
+function renderNewsView() {
+  if (!news.length) return;
+  nvIdx = Math.max(0, Math.min(nvIdx, news.length - 1));
+  $('nvList').innerHTML = news.slice(0, 30).map((i, n) =>
+    '<li data-i="' + n + '" class="' + (n === nvIdx ? 'on' : '') + '"><span class="ago">' + esc(ago(i.t)) + '</span><span>' + esc(i.title) + '</span></li>').join('');
+  $('nvUpd').textContent = newsLoadedAt ? 'bijgewerkt ' + hhmm(new Date(newsLoadedAt)) : '';
+  const a = news[nvIdx];
+  const img = $('nvImg');
+  if (a.img) { img.style.display = 'block'; img.onerror = () => { img.style.display = 'none'; }; if (img.dataset.src !== a.img) { img.src = a.img; img.dataset.src = a.img; } } else img.style.display = 'none';
+  $('nvMeta').textContent = (ago(a.t) === 'nu' ? 'zojuist' : ago(a.t) ? ago(a.t) + ' geleden' : '') + (a.t && !isNaN(a.t) ? ' · ' + new Date(a.t).toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' }) : '');
+  $('nvTitle').textContent = a.title;
+  if ($('nvArtW').dataset.idx !== String(nvIdx)) { $('nvArtW').scrollTop = 0; $('nvArtW').dataset.idx = String(nvIdx); }
+  $('nvDesc').innerHTML = (a.paras && a.paras.length ? a.paras : [a.desc]).map(p => '<p>' + esc(p) + '</p>').join('');
+}
+$('nvList').addEventListener('click', e => { const li = e.target.closest('li'); if (li) { nvIdx = +li.dataset.i; renderNewsView(); } });
+
+/* ===================== MODI: DASHBOARD / WEER / NIEUWS / RADAR ===================== */
+const MODES = { dash: '', weer: 'v-weer', nieuws: 'v-news', radar: 'radar' };
+const modeFromHash = () => { const h = location.hash.slice(1); return Object.prototype.hasOwnProperty.call(MODES, h) ? h : 'dash'; };
+const HOME_MODE = modeFromHash();
+let idleTimer;
+// na IDLE_MINUTES niet aanraken: alles terug naar een schone start
+function idleReset() {
+  if (curMode !== HOME_MODE) setMode(HOME_MODE);
+  if (window.__flReset) window.__flReset();          // selectie weg, spoor weg, kaart terug op Maasdijk
+  nvIdx = 0;
+  for (const id of ['newsList', 'nvList', 'nvArtW']) { const el = $(id); if (el) el.scrollTop = 0; }
+}
+function resetIdle() { clearTimeout(idleTimer); idleTimer = setTimeout(idleReset, IDLE_MINUTES * 60e3); }
+function setMode(m) {
+  if (!Object.prototype.hasOwnProperty.call(MODES, m)) m = 'dash';
+  curMode = m;
+  for (const c of Object.values(MODES)) if (c) document.body.classList.remove(c);
+  if (MODES[m]) document.body.classList.add(MODES[m]);
+  document.querySelectorAll('#menubar .m').forEach(el => el.classList.toggle('on', el.dataset.mode === m));
+  if ($('modeBtn')) $('modeBtn').textContent = m === 'radar' ? '⤡' : '⤢';
+  try { history.replaceState(null, '', m === 'dash' ? location.pathname + location.search : '#' + m); } catch {}
+  if (m === 'weer') { renderWeerView(); if (!$('vxRadar').getAttribute('src')) loadBigRadar(); }
+  if (m === 'nieuws') renderNewsView();
+  setTimeout(() => window.__flRefresh && window.__flRefresh(), 60);
+  resetIdle();
+}
+document.querySelectorAll('#menubar .m').forEach(el => el.addEventListener('click', () => setMode(el.dataset.mode)));
+document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', () => setMode('dash')));
+if ($('modeBtn')) $('modeBtn').addEventListener('click', ev => { ev.stopPropagation(); setMode(curMode === 'radar' ? 'dash' : 'radar'); });
+$('weather').addEventListener('click', () => setMode('weer'));
+$('radarW').addEventListener('click', () => setMode('weer'));
+$('newsW').addEventListener('click', e => { const li = e.target.closest('li[data-i]'); nvIdx = li ? +li.dataset.i : 0; setMode('nieuws'); });
+['pointerdown', 'wheel', 'keydown'].forEach(ev => document.addEventListener(ev, resetIdle, { capture: true, passive: true }));
+window.addEventListener('hashchange', () => { const m = modeFromHash(); if (m !== curMode) setMode(m); });
+setMode(HOME_MODE);
 
 /* ===================== START ===================== */
 tick(); setInterval(tick, 1000);
