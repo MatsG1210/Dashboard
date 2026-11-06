@@ -6,7 +6,7 @@
 <title>Bureau · Maasdijk</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --fs: 1.5;   /* TEKSTGROOTTE: 1 = klein, 1.5 = standaard, 1.7 = groot */
@@ -47,6 +47,7 @@
   .st{display:flex;align-items:center;gap:.5vh;color:rgba(255,255,255,.75);font-weight:400}
   .st i{width:.8vh;height:.8vh;border-radius:50%;background:#888}
   .st i.ok{background:var(--green)} .st i.err{background:var(--red)} .st i.wait{background:var(--orange)}
+  .st .ago{font-size:calc(1.25vh*var(--fs));color:var(--faint);font-variant-numeric:tabular-nums;min-width:3.2vh;display:inline-block}
   #dimBtn{cursor:pointer;font-size:calc(1.9vh*var(--fs));padding:0 .4vh}
   #mbClock{font-variant-numeric:tabular-nums}
 
@@ -85,16 +86,17 @@
   #weather.rain.night{background:linear-gradient(180deg,#1b2230,#384357)}
   .wx-top{display:flex;justify-content:space-between}
   #wxCity{font-size:calc(2vh*var(--fs));font-weight:600}
-  #wxTemp{font-size:calc(6.4vh*var(--fs));font-weight:300;line-height:1;margin-top:.3vh;letter-spacing:-.02em}
+  #wxTemp{font-size:calc(5.8vh*var(--fs));font-weight:300;line-height:1;margin-top:.3vh;letter-spacing:-.02em}
   #wxIcon{font-size:calc(4vh*var(--fs));text-align:right}
   #wxDesc{font-size:calc(1.75vh*var(--fs));font-weight:600;text-align:right;margin-top:.4vh}
   #wxHL{font-size:calc(1.75vh*var(--fs));font-weight:500;text-align:right;color:rgba(255,255,255,.85)}
-  #wxMeta{display:flex;flex-wrap:wrap;gap:.4vh 1.6vh;white-space:nowrap;margin-bottom:1vh;font-size:calc(1.5vh*var(--fs));color:rgba(255,255,255,.8);margin-top:.8vh}
-  #hourly{display:grid;grid-template-columns:repeat(6,1fr);margin-top:auto;text-align:center;border-top:1px solid rgba(255,255,255,.22);padding-top:1.1vh}
+  #wxMeta{display:flex;flex-wrap:wrap;gap:.4vh 1.6vh;white-space:nowrap;font-size:calc(1.5vh*var(--fs));color:rgba(255,255,255,.8);margin-top:.8vh}
+  #hourly{flex:1;display:grid;grid-template-columns:repeat(6,1fr);align-items:center;margin-top:1.2vh;text-align:center;border-top:1px solid rgba(255,255,255,.25);padding-top:.6vh}
+  #hourly>div{display:flex;flex-direction:column;align-items:center;gap:.5vh}
   #hourly .h{font-size:calc(1.5vh*var(--fs));font-weight:600;color:rgba(255,255,255,.85)}
-  #hourly .i{font-size:calc(2.2vh*var(--fs));margin:.4vh 0}
+  #hourly .i{font-size:calc(2.2vh*var(--fs));line-height:1}
   #hourly .t{font-size:calc(1.9vh*var(--fs));font-weight:600}
-  #hourly .p{font-size:calc(1.3vh*var(--fs));color:#bfe3ff;font-weight:600;min-height:1.6vh}
+  #hourly .p{display:none}
 
   /* ---------- radar + regen ---------- */
   #radarW{flex:1;display:flex;flex-direction:column}
@@ -166,19 +168,78 @@
   /* ---------- nachtdimmer ---------- */
   #dim{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity 2s;z-index:9999}
   #dim.on{opacity:.72;pointer-events:auto}
+
+  /* ================= PROFLOATING LICHT THEMA ================= */
+  :root{
+    --pf-orange:#F29201; --pf-navy:#112E48; --pf-blue:#096AD0; --pf-grey:#F0F2F4;
+    --glass: rgba(255,255,255,.52);
+    --glass-strong: rgba(255,255,255,.70);
+    --stroke: rgba(255,255,255,.85);
+    --text: #112E48;
+    --sub: rgba(17,46,72,.62);
+    --faint: rgba(17,46,72,.40);
+    --orange: #F29201; --blue: #096AD0; --teal: #096AD0;
+    --font: Raleway, Inter, system-ui, sans-serif;
+  }
+  html{background:var(--pf-grey)}
+  body{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
+  #wall{inset:0;animation:none;filter:none;
+    background:
+      radial-gradient(38% 45% at 12% 18%, rgba(9,106,208,.16) 0%, transparent 70%),
+      radial-gradient(40% 50% at 88% 12%, rgba(242,146,1,.16) 0%, transparent 70%),
+      radial-gradient(45% 50% at 55% 60%, rgba(17,46,72,.07) 0%, transparent 70%),
+      var(--pf-grey)}
+  #wave{position:fixed;left:0;bottom:0;width:100%;height:45vh;z-index:-1;pointer-events:none;
+    background:radial-gradient(70% 90% at 75% 100%, rgba(242,146,1,.42) 0%, rgba(242,146,1,.14) 45%, transparent 75%),
+               radial-gradient(60% 70% at 10% 100%, rgba(247,179,71,.28) 0%, transparent 70%)}
+  #menubar{background:rgba(255,255,255,.55);border-bottom:1px solid rgba(255,255,255,.9);color:var(--text)}
+  #menubar .m{color:var(--sub)}
+  #menubar .brand{letter-spacing:.02em}
+  #menubar .brand i{background:var(--pf-orange)}
+  .st{color:var(--sub)}
+  .w{background:var(--glass);border:1px solid var(--stroke);
+     box-shadow:0 1vh 3.5vh rgba(17,46,72,.10), inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(17,46,72,.04)}
+  .wt{color:var(--sub);font-weight:700}
+  #calDay{color:var(--pf-orange)}
+  #calNum{color:var(--pf-navy)}
+  /* weer: blauw van de huisstijl, 's nachts navy */
+  #weather{background:linear-gradient(160deg,#096AD0,#3f8fe3);color:#fff}
+  #weather.night{background:linear-gradient(160deg,#112E48,#1f4a73)}
+  #weather.cloudy{background:linear-gradient(160deg,#4f6f8f,#7c97b3)}
+  #weather.cloudy.night{background:linear-gradient(160deg,#112E48,#33506e)}
+  #weather.rain{background:linear-gradient(160deg,#35577a,#5f7f9f)}
+  #weather.rain.night{background:linear-gradient(160deg,#0c2236,#2b4661)}
+  #weather, #weather *{color:#fff}
+  #hourly .p{color:#ffd28a!important}
+  #radarBox{background:rgba(17,46,72,.06)}
+  #rainBars div{background:var(--pf-orange)}
+  #newsList li{border-top-color:rgba(17,46,72,.10)}
+  #featImg{background:rgba(17,46,72,.06)}
+  #dots span{background:rgba(17,46,72,.2)} #dots span.on{background:var(--pf-orange)}
+  #featTitle{color:var(--pf-navy)}
+  #flSide{background:var(--glass-strong);border-left:1px solid rgba(255,255,255,.9)}
+  .fl{border-top-color:rgba(17,46,72,.10)}
+  .fl .route b{color:var(--pf-navy)}
+  #map{background:#e9ecef}
+  .plane-label{color:var(--pf-navy);text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 2px #fff}
+  .leaflet-control-attribution{background:rgba(255,255,255,.6)!important;color:rgba(17,46,72,.5)!important}
+  .leaflet-control-attribution a{color:rgba(17,46,72,.65)!important}
+  .legend{background:rgba(255,255,255,.7);color:var(--text)}
+  #dim{background:#0b1a2a}
 </style>
 </head>
 <body>
 <div id="wall"></div>
+<div id="wave" aria-hidden="true"></div>
 
 <div id="menubar">
   <span class="brand"><i></i>Bureau</span>
   <span class="m">Weer</span><span class="m">Nieuws</span><span class="m">Vluchten</span>
   <span class="grow"></span>
-  <span class="st"><i id="sWeather" class="wait"></i>weer</span>
-  <span class="st"><i id="sRadar" class="wait"></i>radar</span>
-  <span class="st"><i id="sNews" class="wait"></i>NOS</span>
-  <span class="st"><i id="sFlights" class="wait"></i>vluchten</span>
+  <span class="st"><i id="sWeather" class="wait"></i>weer <small class="ago" id="tWeather"></small></span>
+  <span class="st"><i id="sRadar" class="wait"></i>radar <small class="ago" id="tRadar"></small></span>
+  <span class="st"><i id="sNews" class="wait"></i>NOS <small class="ago" id="tNews"></small></span>
+  <span class="st"><i id="sFlights" class="wait"></i>vluchten <small class="ago" id="tFlights"></small></span>
   <span id="dimBtn" title="Nachtstand">☾</span>
   <span id="mbClock">–</span>
 </div>
@@ -247,7 +308,7 @@
       <div id="mapWrap">
         <div id="map"></div>
         <div class="legend">
-          <span style="--c:#ff9f0a">&lt;1 km</span><span style="--c:#ffd60a">1–3</span><span style="--c:#30d158">3–7</span><span style="--c:#64d2ff">7–10</span><span style="--c:#bf5af2">&gt;10 km</span>
+          <span style="--c:#F29201">&lt;1 km</span><span style="--c:#d9480f">1–3</span><span style="--c:#2b8a3e">3–7</span><span style="--c:#096AD0">7–10</span><span style="--c:#112E48">&gt;10 km</span>
         </div>
       </div>
       <div id="flSide">
@@ -289,7 +350,9 @@ async function getText(url, ms = 9000) {
   try { const r = await fetch(url, { signal, cache: 'no-store' }); if (!r.ok) throw new Error('HTTP ' + r.status); return await r.text(); }
   finally { done(); }
 }
-const setStatus = (k, s) => { $('s' + k).className = s; };
+const lastOk = {};
+const setStatus = (k, s) => { $('s' + k).className = s; if (s === 'ok') lastOk[k] = Date.now(); };
+function shortAgo(t) { const s = Math.round((Date.now() - t) / 1000); return s < 60 ? s + 's' : s < 3600 ? Math.floor(s / 60) + 'm' : Math.floor(s / 3600) + 'u'; }
 function ago(t) {
   if (!t || isNaN(t)) return '';
   const m = Math.round((Date.now() - t) / 60000);
@@ -321,11 +384,11 @@ function isoWeek(d) { const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(),
          '" stroke="' + (big ? '#1c1c1e' : '#c7c7cc') + '" stroke-width="' + (big ? 1.6 : .7) + '" stroke-linecap="round"/>';
   }
   [12, 3, 6, 9].forEach((n, i) => { const a = i * 90 * Math.PI / 180;
-    s += '<text x="' + (50 + 32 * Math.sin(a)) + '" y="' + (50 - 32 * Math.cos(a) + 4) + '" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1c1e" font-family="Inter,sans-serif">' + n + '</text>'; });
+    s += '<text x="' + (50 + 32 * Math.sin(a)) + '" y="' + (50 - 32 * Math.cos(a) + 4) + '" text-anchor="middle" font-size="11" font-weight="600" fill="#1c1c1e" font-family="Raleway,Inter,sans-serif">' + n + '</text>'; });
   s += '<line id="hH" x1="50" y1="54" x2="50" y2="28" stroke="#1c1c1e" stroke-width="3.4" stroke-linecap="round"/>' +
        '<line id="hM" x1="50" y1="55" x2="50" y2="14" stroke="#1c1c1e" stroke-width="2.4" stroke-linecap="round"/>' +
-       '<line id="hS" x1="50" y1="58" x2="50" y2="10" stroke="#ff9f0a" stroke-width="1" stroke-linecap="round"/>' +
-       '<circle cx="50" cy="50" r="2.4" fill="#ff9f0a"/><circle cx="50" cy="50" r="1" fill="#fff"/>';
+       '<line id="hS" x1="50" y1="58" x2="50" y2="10" stroke="#F29201" stroke-width="1" stroke-linecap="round"/>' +
+       '<circle cx="50" cy="50" r="2.4" fill="#F29201"/><circle cx="50" cy="50" r="1" fill="#fff"/>';
   $('analog').innerHTML = s;
 })();
 
@@ -341,6 +404,7 @@ function tick() {
   $('calNum').textContent = d.getDate();
   $('calMonth').textContent = d.toLocaleDateString('nl-NL', { month: 'long' });
   $('calWeek').textContent = 'week ' + isoWeek(d);
+  for (const k of ['Weather', 'Radar', 'News', 'Flights']) { const el = $('t' + k); if (el) el.textContent = lastOk[k] ? shortAgo(lastOk[k]) : ''; }
   const night = h >= NIGHT_FROM || h < NIGHT_TO;
   $('dim').classList.toggle('on', Date.now() < dimUntil ? dimManual : night);
 }
@@ -543,28 +607,28 @@ async function showFact() {
 /* ===================== VLUCHTEN ===================== */
 function initFlights() {
 const map = L.map('map', { zoomControl: false, center: [HOME.lat, HOME.lon], zoom: 9, attributionControl: true });
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
   maxZoom: 16, attribution: 'Kaart © Esri'
 }).addTo(map);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
   maxZoom: 16, opacity: .7
 }).addTo(map);
-L.circleMarker([HOME.lat, HOME.lon], { radius: 6, color: '#fff', weight: 2, fillColor: '#0a84ff', fillOpacity: 1 }).addTo(map);
-[10, 25, 50].forEach(km => L.circle([HOME.lat, HOME.lon], { radius: km * 1000, color: '#fff', weight: 1, opacity: .18, fill: false, dashArray: '3 6' }).addTo(map));
+L.circleMarker([HOME.lat, HOME.lon], { radius: 7, color: '#fff', weight: 2.5, fillColor: '#F29201', fillOpacity: 1 }).addTo(map);
+[10, 25, 50].forEach(km => L.circle([HOME.lat, HOME.lon], { radius: km * 1000, color: '#112E48', weight: 1, opacity: .25, fill: false, dashArray: '3 6' }).addTo(map));
 [['RTM', 51.9569, 4.4372], ['AMS', 52.3086, 4.7639]].forEach(([n, la, lo]) =>
   L.marker([la, lo], { interactive: false, icon: L.divIcon({ className: '', iconSize: null,
-    html: '<div style="font:600 14px Inter,sans-serif;color:rgba(255,255,255,.65);background:rgba(20,20,26,.7);border:1px solid rgba(255,255,255,.15);padding:1px 5px;border-radius:5px">✈ ' + n + '</div>' }) }).addTo(map));
+    html: '<div style="font:600 14px Inter,sans-serif;color:#112E48;background:rgba(255,255,255,.85);border:1px solid rgba(17,46,72,.15);padding:1px 5px;border-radius:5px">✈ ' + n + '</div>' }) }).addTo(map));
 // kaart netjes laten passen zodra de layout klaar is
 setTimeout(() => map.invalidateSize(), 300);
 window.addEventListener('resize', () => map.invalidateSize());
 
 function altColor(m, ground) {
-  if (ground) return '#8e8e93'; if (m == null) return '#c7c7cc';
-  return m < 1000 ? '#ff9f0a' : m < 3000 ? '#ffd60a' : m < 7000 ? '#30d158' : m < 10000 ? '#64d2ff' : '#bf5af2';
+  if (ground) return '#8e8e93'; if (m == null) return '#7b8794';
+  return m < 1000 ? '#F29201' : m < 3000 ? '#d9480f' : m < 7000 ? '#2b8a3e' : m < 10000 ? '#096AD0' : '#112E48';
 }
 function planeIcon(trk, col) {
   return L.divIcon({ className: '', iconSize: [22, 22], iconAnchor: [11, 11],
-    html: '<svg width="22" height="22" viewBox="0 0 24 24" style="transform:rotate(' + (trk || 0) + 'deg);filter:drop-shadow(0 0 2px rgba(0,0,0,.9))">' +
+    html: '<svg width="22" height="22" viewBox="0 0 24 24" style="transform:rotate(' + (trk || 0) + 'deg);filter:drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 1.5px #fff)">' +
           '<path fill="' + col + '" d="M12 2c.8 0 1.3.9 1.3 2v5.2l7.7 4.6v2l-7.7-2.3v4.6l2.2 1.7V21L12 20l-3.5 1v-1.2l2.2-1.7v-4.6L3 15.8v-2l7.7-4.6V4c0-1.1.5-2 1.3-2z"/></svg>' });
 }
 function normReadsb(a) {
