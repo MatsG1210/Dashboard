@@ -885,9 +885,9 @@ function readsbList(d) {
 }
 // Bronnen worden op volgorde geprobeerd; de eerste die werkt blijft in gebruik.
 const SOURCES = [
-  { name: 'airplanes.live', every: 10e3, url: () => 'https://api.airplanes.live/v2/point/' + HOME.lat + '/' + HOME.lon + '/' + FLIGHT_RADIUS_NM, parse: readsbList },
-  { name: 'adsb.fi',        every: 10e3, url: () => 'https://opendata.adsb.fi/api/v2/lat/' + HOME.lat + '/lon/' + HOME.lon + '/dist/' + FLIGHT_RADIUS_NM, parse: readsbList },
-  { name: 'adsb.lol',       every: 10e3, url: () => 'https://api.adsb.lol/v2/point/' + HOME.lat + '/' + HOME.lon + '/' + FLIGHT_RADIUS_NM, parse: readsbList },
+  { name: 'airplanes.live', every: 15e3, url: () => 'https://api.airplanes.live/v2/point/' + HOME.lat + '/' + HOME.lon + '/' + FLIGHT_RADIUS_NM, parse: readsbList },
+  { name: 'adsb.fi',        every: 15e3, url: () => 'https://opendata.adsb.fi/api/v2/lat/' + HOME.lat + '/lon/' + HOME.lon + '/dist/' + FLIGHT_RADIUS_NM, parse: readsbList },
+  { name: 'adsb.lol',       every: 15e3, url: () => 'https://api.adsb.lol/v2/point/' + HOME.lat + '/' + HOME.lon + '/' + FLIGHT_RADIUS_NM, parse: readsbList },
   { name: 'OpenSky',        every: 240e3, // anoniem: beperkt aantal verzoeken per dag
     url: () => { const dl = FLIGHT_RADIUS_NM * 1.852 / 111, dn = dl / Math.cos(HOME.lat * Math.PI / 180);
       return 'https://opensky-network.org/api/states/all?lamin=' + (HOME.lat - dl).toFixed(3) + '&lomin=' + (HOME.lon - dn).toFixed(3) + '&lamax=' + (HOME.lat + dl).toFixed(3) + '&lomax=' + (HOME.lon + dn).toFixed(3); },
@@ -916,9 +916,14 @@ let routeIdx = (() => { try { const k = localStorage.getItem('flRoute2'); const 
 function rememberRoute(i) { routeIdx = i; try { localStorage.setItem('flRoute2', routeKey(ROUTES[i])); } catch {} }
 
 // eerste keer: alle routes tegelijk proberen, de snelste wint
+// bron die 429 (te veel verzoeken) of 403 (geblokkeerd) geeft: 10 minuten met rust laten
+const cooldown = {};
+const cooling = r => (cooldown[r.src.name] || 0) > Date.now();
+function noteError(r, e) { if (/^HTTP (429|403)/.test(e && e.message || '')) cooldown[r.src.name] = Date.now() + 10 * 60e3; }
 async function raceRoutes() {
   try {
-    return await Promise.any(ROUTES.map((r, i) => getJSON(r.proxy.wrap(r.src.url()), 9000).then(d => ({ i, list: r.src.parse(d) }))));
+    return await Promise.any(ROUTES.map((r, i) => cooling(r) ? Promise.reject(new Error('cooldown'))
+      : getJSON(r.proxy.wrap(r.src.url()), 9000).then(d => ({ i, list: r.src.parse(d) }), e => { noteError(r, e); throw e; })));
   } catch { return null; }
 }
 
@@ -933,10 +938,11 @@ async function loadFlights() {
   } else {
     for (let tries = 0; tries < ROUTES.length; tries++) {
       route = ROUTES[routeIdx];
+      if (cooling(route)) { routeIdx = (routeIdx + 1) % ROUTES.length; continue; }
       try { list = route.src.parse(await getJSON(route.proxy.wrap(route.src.url()), 7000)); rememberRoute(routeIdx); break; }
-      catch (e) { errors.push(route.src.name + ' (' + route.proxy.name + '): ' + (e.name === 'AbortError' ? 'time-out' : e.message)); routeIdx = (routeIdx + 1) % ROUTES.length; }
+      catch (e) { noteError(route, e); errors.push(route.src.name + ' (' + route.proxy.name + '): ' + (e.name === 'AbortError' ? 'time-out' : e.message)); routeIdx = (routeIdx + 1) % ROUTES.length; }
     }
-    if (!list) routeIdx = null; // volgende keer opnieuw racen
+    if (!list && !ROUTES.every(cooling)) routeIdx = null; // volgende keer opnieuw racen
   }
   if (list) {
     updatePlanes(list);
