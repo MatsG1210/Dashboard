@@ -53,11 +53,43 @@
 
   /* ---------- grid ---------- */
   .grid{display:grid;height:calc(100vh - 3.6vh);padding:1.6vh;gap:1.6vh;
-    grid-template-columns:27% 1fr; grid-template-rows:58% 1fr;
-    grid-template-areas:"left top" "left bottom"}
+    grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:58% 1fr;
+    grid-template-areas:"left top notion" "left bottom notion"}
   .left{grid-area:left;display:flex;flex-direction:column;gap:1.6vh;min-height:0}
   .top{grid-area:top;display:flex;gap:1.6vh;min-height:0}
   .bottom{grid-area:bottom;min-height:0;display:flex}
+  .notion{grid-area:notion;min-height:0;display:flex}
+
+  /* ---------- notion ---------- */
+  #notionW{flex:1;display:flex;flex-direction:column}
+  .nbadge{background:#112E48;color:#fff;font-weight:800;font-size:calc(1.3vh*var(--fs));padding:.2vh .7vh;border-radius:.5vh;letter-spacing:.04em;text-transform:none}
+  #notionTitle{font-size:calc(2.3vh*var(--fs));font-weight:800;color:#112E48;line-height:1.15;margin:.2vh 0 1.2vh;display:flex;justify-content:space-between;align-items:baseline;gap:1vh}
+  #notionTitle .ncount{font-size:calc(1.45vh*var(--fs));font-weight:700;color:var(--orange);white-space:nowrap}
+  #notionBody{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:rgba(17,46,72,.25) transparent;
+    padding-right:.6vh;font-size:calc(1.7vh*var(--fs));line-height:1.4;color:var(--text)}
+  #notionBody>:first-child{margin-top:0}
+  .nh1,.nh2,.nh3{font-weight:800;color:#112E48;line-height:1.2}
+  .nh1{font-size:calc(2.15vh*var(--fs));margin:2vh 0 .8vh}
+  .nh2{font-size:calc(1.9vh*var(--fs));margin:1.8vh 0 .6vh}
+  .nh3{font-size:calc(1.4vh*var(--fs));margin:1.6vh 0 .5vh;color:var(--sub);text-transform:uppercase;letter-spacing:.04em}
+  .np{margin:.5vh 0}
+  .nk{padding-left:2.8vh}
+  .ntd{display:flex;gap:1.2vh;align-items:flex-start;padding:.8vh 0;border-top:1px solid rgba(17,46,72,.08)}
+  .ntd i{flex:0 0 auto;width:2.1vh;height:2.1vh;border-radius:50%;border:2px solid rgba(17,46,72,.3);margin-top:.15em;position:relative}
+  .ntd.done i{background:var(--orange);border-color:var(--orange)}
+  .ntd.done i:after{content:'';position:absolute;left:32%;top:12%;width:24%;height:48%;border:solid #fff;border-width:0 .3vh .3vh 0;transform:rotate(45deg)}
+  .ntd.done span{color:var(--faint);text-decoration:line-through}
+  .nli{display:flex;gap:1vh;align-items:flex-start;padding:.3vh 0}
+  .nli i{flex:0 0 2.2vh;font-style:normal;color:var(--orange);font-weight:800;text-align:center}
+  .ncall{display:flex;gap:1.2vh;padding:1.2vh 1.4vh;border-radius:1.4vh;background:rgba(242,146,1,.12);margin:1vh 0}
+  .nq{border-left:.4vh solid var(--orange);padding:.2vh 0 .2vh 1.4vh;margin:.8vh 0;color:var(--sub)}
+  .ntg{font-weight:700;margin:.8vh 0 .3vh}
+  .ntg .arr{color:var(--orange);margin-right:.6vh}
+  .ndiv{border:none;border-top:1px solid rgba(17,46,72,.12);margin:1.4vh 0}
+  #notionBody code,.ncode{font-family:ui-monospace,Menlo,monospace;font-size:.88em;background:rgba(17,46,72,.07);padding:.1em .35em;border-radius:.4em}
+  .ncode{display:block;padding:1vh 1.2vh;white-space:pre-wrap;margin:.8vh 0}
+  .nmsg{color:var(--sub);font-size:calc(1.6vh*var(--fs));line-height:1.4}
+  .nmsg small{color:var(--faint)}
 
   .w{background:var(--glass);border:1px solid var(--stroke);border-radius:var(--r);
      backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);
@@ -261,7 +293,7 @@
   /* ---------- radarmodus ---------- */
   #menubar .m{cursor:pointer;padding:.2vh .8vh;border-radius:.8vh}
   #menubar .m.on{background:rgba(17,46,72,.08);color:var(--text);font-weight:700}
-  body.radar .left, body.radar .top{display:none}
+  body.radar .left, body.radar .top, body.radar .notion{display:none}
   body.radar .grid{grid-template-columns:1fr;grid-template-rows:1fr;grid-template-areas:"bottom"}
   body.radar #flSide{flex-basis:30%}
   #modeBtn{position:absolute;top:1.4vh;left:1.4vh;z-index:600;width:4.4vh;height:4.4vh;border-radius:1.2vh;display:flex;align-items:center;justify-content:center;
@@ -346,7 +378,7 @@
 
   /* dashboard: alleen de kaart, info pas na aantikken */
   body:not(.radar) #flSide{display:none}
-  body:not(.radar) #flSide.detail{display:flex;flex-basis:38%}
+  body:not(.radar) #flSide.detail{display:flex;flex-basis:55%}
   #flDetail{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(17,46,72,.25) transparent}
   body:not(.radar) .dt-photo{height:13vh}
 </style>
@@ -363,6 +395,7 @@
   <span class="st"><i id="sRadar" class="wait"></i>radar <small class="ago" id="tRadar"></small></span>
   <span class="st"><i id="sNews" class="wait"></i>NOS <small class="ago" id="tNews"></small></span>
   <span class="st"><i id="sFlights" class="wait"></i>vluchten <small class="ago" id="tFlights"></small></span>
+  <span class="st"><i id="sNotion" class="wait"></i>Notion <small class="ago" id="tNotion"></small></span>
   <span id="dimBtn" title="Nachtstand">☾</span>
   <span id="mbClock">–</span>
 </div>
@@ -427,6 +460,15 @@
         <div id="flDetail"></div>
         <div id="flMsg"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- RECHTS: NOTION -->
+  <div class="notion">
+    <div class="w" id="notionW">
+      <div class="wt"><span><span class="nbadge">Notion</span></span><b id="notionUpd"></b></div>
+      <div id="notionTitle"><span>Laden…</span></div>
+      <div id="notionBody"></div>
     </div>
   </div>
 </div>
@@ -523,7 +565,7 @@ function tick() {
   $('dDay').textContent = d.toLocaleDateString('nl-NL', { weekday: 'long' });
   $('dRest').textContent = d.getDate() + ' ' + d.toLocaleDateString('nl-NL', { month: 'long' }) + ' · week ' + isoWeek(d);
   $('mbClock').textContent = d.toLocaleDateString('nl-NL', { weekday: 'short', day: 'numeric', month: 'short' }) + '  ' + hhmm(d);
-  for (const k of ['Weather', 'Radar', 'News', 'Flights']) { const el = $('t' + k); if (el) el.textContent = lastOk[k] ? shortAgo(lastOk[k]) : ''; }
+  for (const k of ['Weather', 'Radar', 'News', 'Flights', 'Notion']) { const el = $('t' + k); if (el) el.textContent = lastOk[k] ? shortAgo(lastOk[k]) : ''; }
   const night = h >= NIGHT_FROM || h < NIGHT_TO;
   $('dim').classList.toggle('on', Date.now() < dimUntil ? dimManual : night);
 }
@@ -641,6 +683,72 @@ function renderNews() {
     '<li data-i="' + n + '"><span class="ago">' + esc(ago(i.t)) + '</span><div><div class="nt">' + esc(i.title) + '</div>' +
     (i.desc ? '<div class="nd">' + esc(i.desc) + '</div>' : '') + '</div></li>').join('');
   $('newsUpd').textContent = newsLoadedAt ? 'bijgewerkt ' + hhmm(new Date(newsLoadedAt)) : '';
+}
+
+/* ===================== NOTION (via eigen Cloudflare Worker) ===================== */
+// Adres van de Notion-worker (zie notion-worker.js). Leeg laten = blok toont een hint.
+const NOTION_URL = 'https://notion.matsgunneweg.workers.dev/';
+const NOTION_EVERY_MIN = 2;
+let notionSig = '';
+function rtHTML(a) {
+  return (a || []).map(x => {
+    let s = esc(x.t);
+    if (x.c) s = '<code>' + s + '</code>';
+    if (x.b) s = '<b>' + s + '</b>';
+    if (x.i) s = '<i>' + s + '</i>';
+    if (x.s) s = '<s>' + s + '</s>';
+    return s;
+  }).join('');
+}
+function notionBlocks(list) {
+  let html = '', num = 0;
+  for (const b of list || []) {
+    num = b.type === 'numbered_list_item' ? num + 1 : 0;
+    const t = rtHTML(b.text), kids = b.children && b.children.length ? '<div class="nk">' + notionBlocks(b.children) + '</div>' : '';
+    switch (b.type) {
+      case 'heading_1': html += '<div class="nh1">' + t + '</div>' + kids; break;
+      case 'heading_2': html += '<div class="nh2">' + t + '</div>' + kids; break;
+      case 'heading_3': html += '<div class="nh3">' + t + '</div>' + kids; break;
+      case 'to_do': html += '<div class="ntd' + (b.checked ? ' done' : '') + '"><i></i><span>' + t + '</span></div>' + kids; break;
+      case 'bulleted_list_item': html += '<div class="nli"><i>•</i><span>' + t + '</span></div>' + kids; break;
+      case 'numbered_list_item': html += '<div class="nli"><i>' + num + '.</i><span>' + t + '</span></div>' + kids; break;
+      case 'callout': html += '<div class="ncall"><span>' + esc(b.icon || '💡') + '</span><div>' + t + kids + '</div></div>'; break;
+      case 'quote': html += '<div class="nq">' + t + kids + '</div>'; break;
+      case 'toggle': html += '<div class="ntg"><span class="arr">▾</span>' + t + '</div>' + kids; break;
+      case 'divider': html += '<hr class="ndiv">'; break;
+      case 'code': html += '<pre class="ncode">' + t + '</pre>'; break;
+      case 'child_page': html += '<div class="np">📄 ' + t + '</div>'; break;
+      default: html += '<div class="np">' + (t || '&nbsp;') + '</div>' + kids;
+    }
+  }
+  return html;
+}
+function countTodos(list, c = { done: 0, all: 0 }) {
+  for (const b of list || []) { if (b.type === 'to_do') { c.all++; if (b.checked) c.done++; } countTodos(b.children, c); }
+  return c;
+}
+function renderNotion(d) {
+  const c = countTodos(d.blocks);
+  $('notionTitle').innerHTML = '<span>' + esc(d.title || 'Notion') + '</span>' + (c.all ? '<span class="ncount">' + c.done + '/' + c.all + ' klaar</span>' : '');
+  const w = $('notionBody'), top = w.scrollTop;
+  w.innerHTML = notionBlocks(d.blocks) || '<div class="nmsg">Deze pagina is leeg.</div>';
+  w.scrollTop = top;
+}
+async function loadNotion() {
+  if (!NOTION_URL) { $('notionTitle').innerHTML = '<span>Notion</span>'; $('notionBody').innerHTML = '<div class="nmsg">Nog niet gekoppeld: vul NOTION_URL in.</div>'; setStatus('Notion', 'err'); return; }
+  try {
+    const d = await getJSON(NOTION_URL, 15000);
+    if (d.error) throw new Error(d.error);
+    const sig = JSON.stringify([d.title, d.blocks]);
+    if (sig !== notionSig) { notionSig = sig; renderNotion(d); }
+    $('notionUpd').textContent = 'bijgewerkt ' + hhmm(new Date());
+    setStatus('Notion', 'ok');
+  } catch (e) {
+    console.warn('notion', e);
+    setStatus('Notion', notionSig ? 'wait' : 'err');
+    if (!notionSig) { $('notionTitle').innerHTML = '<span>Notion</span>';
+      $('notionBody').innerHTML = '<div class="nmsg">Notion niet bereikbaar – nieuwe poging over ' + NOTION_EVERY_MIN + ' min.<br><small>' + esc(e.name === 'AbortError' ? 'time-out' : e.message) + '</small></div>'; }
+  }
 }
 
 /* ===================== WEETJES ===================== */
@@ -1214,7 +1322,7 @@ function idleReset() {
   if (curMode !== HOME_MODE) setMode(HOME_MODE);
   if (window.__flReset) window.__flReset();          // selectie weg, spoor weg, kaart terug op Maasdijk
   nvIdx = 0;
-  for (const id of ['newsList', 'nvList', 'nvArtW']) { const el = $(id); if (el) el.scrollTop = 0; }
+  for (const id of ['newsList', 'nvList', 'nvArtW', 'notionBody']) { const el = $(id); if (el) el.scrollTop = 0; }
 }
 function resetIdle() { clearTimeout(idleTimer); idleTimer = setTimeout(idleReset, IDLE_MINUTES * 60e3); }
 function setMode(m) {
@@ -1246,6 +1354,7 @@ loadWeather(); setInterval(loadWeather, 10 * 60e3);
 loadRadar();   setInterval(() => { radarIdx = 0; loadRadar(); }, 5 * 60e3);
 loadNews();    setInterval(loadNews, 10 * 60e3);
 setInterval(renderNews, 60e3); // 'x min geleden' bijwerken
+loadNotion();  setInterval(loadNotion, NOTION_EVERY_MIN * 60e3);
 if (window.L) initFlights();
 else { setStatus('Flights', 'err'); $('flMsg').textContent = '⚠️ Kaartbibliotheek kon niet laden – check de internetverbinding.'; setTimeout(() => location.reload(), 60e3); }
 setTimeout(() => location.reload(), 6 * 3600e3); // elke 6 uur verse start
